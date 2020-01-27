@@ -45,7 +45,7 @@ app.get("/user-registration",(req,res)=>{
 
 // });
 
-// app.get("/products",(req,res)=>{
+// app.get("/roomlisting",(req,res)=>{
 
 
 //     const fakeDB= [];
