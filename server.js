@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs  = require('express-handlebars');
 const app = express();
+const port = 3000;
 
 //This allows express to make my static content available from the public
 app.use(express.static('public'))
@@ -70,8 +71,13 @@ app.get("/user-registration",(req,res)=>{
 //     });
 // });
 
-const PORT=3000;
-app.listen(3000,()=>{
 
-    console.log(`Web server is up and running`)
+app.listen(port,()=>{
+
+    console.log(`Web server is up and running on port ${port}!`)
 })
+
+// handle 404 responses
+app.use(function (req, res, next) {
+    res.status(404).send("Sorry can't find that!")
+  })
