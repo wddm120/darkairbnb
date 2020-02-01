@@ -3,6 +3,12 @@ const exphbs  = require('express-handlebars');
 const app = express();
 const port = 3000;
 
+const settings = {
+    notifyQuantitiesRemaining: 5,
+    // productsPerPage: 3,
+    imagePath: 'img/rooms/'
+  }
+
 //This allows express to make my static content available from the public
 app.use(express.static('public'))
 
@@ -21,13 +27,13 @@ app.get("/",(req,res)=>{
     })
 });
 
-app.get("/room-listing",(req,res)=>{
-  res.render("roomlisting",{
-      title: "Room Listing",
-      headingInfo : "Room Listing Page",
-  });
+// app.get("/room-listing",(req,res)=>{
+//   res.render("roomlisting",{
+//       title: "Room Listing",
+//       headingInfo : "Room Listing Page",
+//   });
 
-});
+// });
 
 app.get("/user-registration",(req,res)=>{
   res.render("userregistration",{
@@ -47,30 +53,71 @@ app.get("/user-registration",(req,res)=>{
 
 // });
 
-// app.get("/roomlisting",(req,res)=>{
+app.get("/room-listing",(req,res)=>{
 
 
-//     const fakeDB= [];
+    // const fakeDB= [];
 
-//     fakeDB.push({title:'XPS 13',description:`Our smallest 13-inch laptops feature a virtually 
-//     borderless InfinityEdge display and up to 10th gen Intel® processors. 
-//     Touch, silver, rose gold and frost options available
-//     `,price:`1349.99`});
+    // fakeDB.push({title:'XPS 13',description:`Our smallest 13-inch laptops feature a virtually 
+    // borderless InfinityEdge display and up to 10th gen Intel® processors. 
+    // Touch, silver, rose gold and frost options available
+    // `,price:`1349.99`});
 
-//     fakeDB.push({title:'XPS 15',description:`Powerhouse performance with the latest processors and NVIDIA 
-//     graphics paired with a stunning 4K Ultra HD display.`,price:`1749.99`});
+    // fakeDB.push({title:'XPS 15',description:`Powerhouse performance with the latest processors and NVIDIA 
+    // graphics paired with a stunning 4K Ultra HD display.`,price:`1749.99`});
 
-//     fakeDB.push({title:'XPS 17',description:`XPS 17 is designed to keep you entertained for more than 9 hours 
-//     with a 9-cell battery upgrade.`,price:`1949.99`});
+    // fakeDB.push({title:'XPS 17',description:`XPS 17 is designed to keep you entertained for more than 9 hours 
+    // with a 9-cell battery upgrade.`,price:`1949.99`});
+
+    const allRooms =[
+        { //0
+          id : 101,
+          image : `img01.jpg`,
+          title: `Champ Super 1`,
+          description: `champion`,
+          price: 39
+        },{ //1
+          id : 102,
+          image : `img02.jpg`,
+          title: `Nike Super 1`,
+          description: `nike`,
+          price: 59
+        },{ //2
+          id : 103,
+          image : `img03.jpg`,
+          title: `Adidas Super 1`,
+          description: `adidas`,
+          price: 69
+        },{ //3
+          id : 104,
+          image : `img04.jpg`,
+          title: `Fila Super 1`,
+          description: `fila`,
+          price: 49
+        },{ //4
+          id : 105,
+          image : `img05.jpg`,
+          title: `Puma Super 1`,
+          description: `puma`,
+          price: 49
+        },{ //5
+          id : 106,
+          image : `img06.jpg`,
+          title: `Champ Super 2`,
+          description: `champion`,
+          price: 139
+        }
+    ]
+
+    res.render("roomlisting",{
+        title: "Room Listing",
+        headingInfo : "Room Listing",
+        products : allRooms
+
+    });
+});
 
 
-//     res.render("products",{
-//         title: "Products",
-//         headingInfo : "Products Page",
-//         products : fakeDB
-
-//     });
-// });
 
 
 app.listen(port,()=>{
