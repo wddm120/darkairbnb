@@ -70,13 +70,12 @@ fieldset {
   justify-content: center;
   border: solid 1px;
   background-color: green;
-
+  padding: 0.5rem;
 }
 
 .logo, .signin {
   width: 100%;
   background-color: bisque;  
-  margin: 0.5rem;
   text-align: center;
 }
 
