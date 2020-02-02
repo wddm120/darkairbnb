@@ -1,20 +1,31 @@
-{{!-- {{#each products }}
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/room.css">
+
+{{!-- <h1>TEST room listing1</h1> --}}
+
+{{#each products }}
+
+
 <div>
-        <p>
-           Title: {{this.title}}
-        </p>
-        <p>
-            Price :${{this.price}}
-        </p>
-        <p>
-           Description {{this.description}}
-        </p>
+   {{!-- <img src="${settings.imagePath + product.image}" alt="${product.name}" class="product-img">
+  </header> --}}
+
+
+   <ul class="product-info">
+      <li><img src={{this.image}}></li>
+      <li>
+         <h3>Title: {{this.title}}</h3>
+      </li>
+      {{!-- <li><label>${callout}</label</li> --}}
+      <li><label>Description {{this.description}}</label></li>
+      <li><label>Price :${{this.price}}</label></li>
+      {{!-- <li><img src="${settings.imagePath + product.ratingImg}" class="product-rating-img"></li> --}}
+
+   </ul>
 </div>
 
 
-{{/each}} --}}
-<h1>TEST room listing1</h1>
-<ul>
-   <li>1</li>
-   <li>2</li>
-</ul>
+{{/each}}
+
+

@@ -72,37 +72,37 @@ app.get("/room-listing",(req,res)=>{
     const allRooms =[
         { //0
           id : 101,
-          image : `img01.jpg`,
+          image : `img/rooms/img01.jpg`,
           title: `Champ Super 1`,
           description: `champion`,
           price: 39
         },{ //1
           id : 102,
-          image : `img02.jpg`,
+          image : `img/rooms/img02.jpg`,
           title: `Nike Super 1`,
           description: `nike`,
           price: 59
         },{ //2
           id : 103,
-          image : `img03.jpg`,
+          image : `img/rooms/img03.jpg`,
           title: `Adidas Super 1`,
           description: `adidas`,
           price: 69
         },{ //3
           id : 104,
-          image : `img04.jpg`,
+          image : `img/rooms/img04.jpg`,
           title: `Fila Super 1`,
           description: `fila`,
           price: 49
         },{ //4
           id : 105,
-          image : `img05.jpg`,
+          image : `img/rooms/img05.jpg`,
           title: `Puma Super 1`,
           description: `puma`,
           price: 49
         },{ //5
           id : 106,
-          image : `img06.jpg`,
+          image : `img/rooms/img06.jpg`,
           title: `Champ Super 2`,
           description: `champion`,
           price: 139
