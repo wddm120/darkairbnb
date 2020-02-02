@@ -4,18 +4,18 @@ const app = express();
 const port = 3000;
 
 const settings = {
-    notifyQuantitiesRemaining: 5,
-    // productsPerPage: 3,
-    imagePath: 'img/rooms/'
+    
+    imagePath: `img/rooms/`,
+    starsPath: `img/stars/`
   }
 
 //This allows express to make my static content available from the public
-app.use(express.static('public'))
+app.use(express.static(`public`))
 
 
 //This tells Express to set or register Handlebars as its' Template/View Engine
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
+app.engine(`handlebars`, exphbs());
+app.set(`view engine`, `handlebars`);
 
 //set up routes
 app.get("/",(req,res)=>{
@@ -72,37 +72,43 @@ app.get("/room-listing",(req,res)=>{
     const allRooms =[
         { //0
           id : 101,
-          image : `img/rooms/img01.jpg`,
+          roomImg : settings.imagePath+`img01.jpg`,
+          starImg: settings.starsPath+`2stars.png`,
           title: `Champ Super 1`,
           description: `champion`,
           price: 39
         },{ //1
           id : 102,
-          image : `img/rooms/img02.jpg`,
+          roomImg : settings.imagePath+`img02.jpg`,
+          starImg: settings.starsPath+`3stars.png`,
           title: `Nike Super 1`,
           description: `nike`,
           price: 59
         },{ //2
           id : 103,
-          image : `img/rooms/img03.jpg`,
+          roomImg : settings.imagePath+`img03.jpg`,
+          starImg: settings.starsPath+`4stars.png`,
           title: `Adidas Super 1`,
           description: `adidas`,
           price: 69
         },{ //3
           id : 104,
-          image : `img/rooms/img04.jpg`,
+          roomImg : settings.imagePath+`img04.jpg`,
+          starImg: settings.starsPath+`1star.png`,
           title: `Fila Super 1`,
           description: `fila`,
           price: 49
         },{ //4
           id : 105,
-          image : `img/rooms/img05.jpg`,
+          roomImg : settings.imagePath+`img05.jpg`,
+          starImg: settings.starsPath+`0star.png`,
           title: `Puma Super 1`,
           description: `puma`,
           price: 49
         },{ //5
           id : 106,
-          image : `img/rooms/img06.jpg`,
+          roomImg : settings.imagePath+`img06.jpg`,
+          starImg: settings.starsPath+`5stars.png`,
           title: `Champ Super 2`,
           description: `champion`,
           price: 139
@@ -112,7 +118,7 @@ app.get("/room-listing",(req,res)=>{
     res.render("roomlisting",{
         title: "Room Listing",
         headingInfo : "Room Listing",
-        products : allRooms
+        rooms : allRooms
 
     });
 });

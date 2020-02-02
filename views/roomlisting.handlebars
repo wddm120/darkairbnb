@@ -2,29 +2,25 @@
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/room.css">
 
-{{!-- <h1>TEST room listing1</h1> --}}
 
-{{#each products }}
-
-
-<div>
-   {{!-- <img src="${settings.imagePath + product.image}" alt="${product.name}" class="product-img">
-  </header> --}}
+{{#each rooms }}
 
 
-   <ul class="product-info">
-      <li><img src={{this.image}}></li>
-      <li>
-         <h3>Title: {{this.title}}</h3>
+
+<div class="room">
+   <ul class="room-info">
+      <li><img src={{this.roomImg}}></li>
+      <li class="top-room-info">
+         <h3>Title : {{this.title}}</h3><img src={{this.starImg}} class="star-img">
       </li>
       {{!-- <li><label>${callout}</label</li> --}}
-      <li><label>Description {{this.description}}</label></li>
-      <li><label>Price :${{this.price}}</label></li>
-      {{!-- <li><img src="${settings.imagePath + product.ratingImg}" class="product-rating-img"></li> --}}
+      <li><label>Description : {{this.description}}</label></li>
+      <li><label>Price : ${{this.price}}</label></li>
+   
 
    </ul>
-</div>
 
+</div>
 
 {{/each}}
 

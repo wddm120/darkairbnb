@@ -1,6 +1,30 @@
-.products{
+.room{
   display: grid;
+}
 
+.room-info{
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  width: 100%;
+  background: var(--light);
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  color: var(--dark);
+}
+
+.top-room-info{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  background-color:var(--light) ;
+
+}
+
+.star-img{
+  width: 15%;
+  /* height: 30%; */
 }
 
 .product{
@@ -24,50 +48,23 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin: 0 ;
-  color: black;
 }
 
-.add-product{
-  background: var(--primary);
-  margin: 0.5rem 0;
-  color: var(--dark);
-  font-size: 0.5rem;
-  box-shadow: var(--shadow);
-
-  background-size: cover; 
-  background-position: center; 
-  display: inline-block; 
-  border: none; 
-  padding: 10px; 
-  width: 35px; 
-  border-radius: 450px; 
-  height: 35px; 
-  transition: all 0.5s; 
-  cursor: pointer;
+@media(min-width: 600px){
+  .room{
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.add-product:hover{ 
-  width: 37.5px; height: 37.5px;
+@media(min-width: 800px){
+  .room{
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.course.soldout {
-  box-shadow: none;
-  background-color: var(--light);
-  color: #999;
+@media(min-width: 1000px){
+  .room{
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
-.rating-list img{
-  width: 50%;
-  height: 50%;
-padding: 0.25rem;
-  
-}
-
-.product-rating-img{
-  width: 40%;
-  height: 40%;
-}
-
-.pagenumbers{
-  text-align: center;
-}
