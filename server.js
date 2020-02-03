@@ -24,7 +24,8 @@ app.get("/",(req,res)=>{
         headingInfo : "Home Page",
       
         randomContent: "BLAH BLAH BLHA"
-    })
+    });
+    
 });
 
 // app.get("/room-listing",(req,res)=>{

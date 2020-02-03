@@ -2,26 +2,16 @@
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/room.css">
 
-
-{{#each rooms }}
-
-
-
 <div class="room">
-   <ul class="room-info">
-      <li><img src={{this.roomImg}}></li>
-      <li class="top-room-info">
-         <h3>Title : {{this.title}}</h3><img src={{this.starImg}} class="star-img">
-      </li>
-      {{!-- <li><label>${callout}</label</li> --}}
-      <li><label>Description : {{this.description}}</label></li>
-      <li><label>Price : ${{this.price}}</label></li>
-   
-
-   </ul>
-
-</div>
-
+{{#each rooms }}
+<ul class="room-info">
+   <li><img src={{this.roomImg}}></li>
+   <li class="top-room-info">
+      <h3>{{this.title}}</h3><img src={{this.starImg}} class="star-img">
+   </li>
+   <li><label>{{this.description}}</label></li>
+   <li><label>${{this.price}} / night</label></li>
+</ul>
 {{/each}}
-
+</div>
 
