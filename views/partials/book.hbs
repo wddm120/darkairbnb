@@ -1,0 +1,24 @@
+<div class="book">
+  <h1>Book unique places to stay and things to do.</h1>
+  <form action="">
+    <fieldset>
+      <legend for="where"> &nbsp WHERE &nbsp</legend>
+      <input type="search" name="find" id="where" placeholder="Anywhere">
+    </fieldset>
+    <div class="in-out">
+      <fieldset>
+        <legend for="checkIn"> &nbsp CHECK-IN &nbsp</legend>
+        <input type="date" name="checkIn" id="checkIn" required pattern="\d{2}-\d{2}-\d{4}">
+      </fieldset>
+      <fieldset>
+        <legend for="checkout"> &nbsp CHECKOUT &nbsp</legend>
+        <input type="date" name="checkOut" id="checkOut">
+      </fieldset>
+    </div>
+    <fieldset>
+      <legend for="guest"> &nbsp GUESTS &nbsp</legend>
+      <input type="text" name="guest" id="guest" placeholder="Guests">
+    </fieldset>
+    <p class="submit"><input type="submit" name="search" value="Search"></p>
+  </form>
+</div>
