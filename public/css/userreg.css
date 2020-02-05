@@ -1,4 +1,4 @@
-.login {
+.login, .sign-up {
   /* position: relative; */
   margin: 0.5rem auto;
   padding: 0.5rem;
@@ -10,7 +10,7 @@
   
 }
 
-.login h1 {
+.login h1, .sign-up h1 {
   margin: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
@@ -20,7 +20,7 @@
 
 }
 
-.login p {
+.login p, .sign-up p {
   margin: 0.5rem;
   margin-left: auto;
   margin-right: auto;
@@ -37,24 +37,24 @@
 
 }
 
-.login p.remember_me {
+.login p.remember_me, .sign-up p.dont_want_receive{
   text-align: left;
   margin: 0 0.5rem;
 
 }
 
-.login p.remember_me label {
+.login p.remember_me label, .sign-up p.dont_want_receive {
   color: #777;
   cursor: pointer;
 }
 
-.login p.submit {
+.login p.submit, .sign-up p.submit {
   text-align: right;
   margin: 0.5rem;
 
 }
 
-.login-help {
+.login-help, .sign-up-help {
   margin: 0.5rem;
   font-size: 11px;
   color:var(--light);
@@ -62,12 +62,12 @@
   text-shadow: 0 1px #2a85a1;
 }
 
-.login-help a {
+.login-help a, .sign-up-help a {
   color: #cce7fa;
   text-decoration: none;
 }
 
-.login-help a:hover {
+.login-help a:hover, .sign-up-help a:hover {
   text-decoration: underline;
 }
 
@@ -108,14 +108,14 @@ input[type=submit] {
 
 /* MEDIA QUERIES */
 @media(min-width: 600px){
-  .login {
+  .login, .sign-up {
     width: 80%;  
     margin: 1rem auto;
   }
 }
 
 @media(min-width: 800px){
-  .login {
+  .login, .sign-up {
     width: 60%; 
     margin: 2rem auto;
   }

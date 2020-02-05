@@ -1,18 +1,21 @@
-<div class="login">
-  <h1>Login to Dark Airbnb</h1>
+<div class="sign-up">
   <form action="">
-    <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
-    <p><input type="password" name="password" value="" placeholder="Password"></p>
-    <p class="remember_me">
+    <p><input type="text" name="email" value="" placeholder="Email address"></p>
+    <p><input type="text" name="fistName" value="" placeholder="First name"></p>
+    <p><input type="text" name="lastName" value="" placeholder="Last name"></p>
+    <p><input type="password" name="password" value="" placeholder="Create a password"></p>
+    <p class="dont_want_receive">
       <label>
-        <input type="checkbox" name="remember_me" id="remember_me">
-        Remember me on this computer
+        <input type="checkbox" name="dont_want_receive" id="dont_want_receive">
+        I don't want to receive marketing messages from Dark Airbnb
       </label>
     </p>
-    <p class="submit"><input type="submit" name="commit" value="Login"></p>
+    <p class="submit"><input type="submit" name="signup" value="Sign up"></p>
   </form>
 </div>
-
-<div class="login-help">
+{{!-- <div class="login-help">
   <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
+</div> --}}
+<div class="login-help">
+  <p>Already have an Dark Airbnb account <a href="/login">Log in</a></p>
 </div>
