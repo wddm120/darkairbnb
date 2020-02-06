@@ -43,7 +43,7 @@ h3{
 }
 
 
-fieldset {
+/* fieldset {
   display: block;
   border: solid 1px var(--light);
   padding-block-start: 0.35em;
@@ -52,7 +52,7 @@ fieldset {
   padding-inline-start: 0.75em;
   min-inline-size: min-content;
 
-}
+} */
 
 
 .wrapper{
@@ -76,7 +76,6 @@ fieldset {
 
 .logo, .signin {
   width: 100%;
-
   text-align: center;
 }
 
@@ -281,7 +280,7 @@ width: 38%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 60%;
   padding: 0.5rem;
 
 }
@@ -378,30 +377,40 @@ width: 38%;
    }
 
    .mobile-apps img, .social-media img{
-    width:90%;
+    width:100%;
+   
   }
 
 }
 
 @media(min-width: 800px){
   .logo, .signin {
-    width: 80%;
+    width: 50%;
   }
 
   .products{
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .mobile-apps img, .social-media img{
+    width:80%;
+   
+  }
+
 }
 
 @media(min-width: 1000px){
   .logo, .signin {
-    width: 70%;
+    width: 40%;
   }
 
   .products{
     grid-template-columns: repeat(6, 1fr);
   }
  
+  .mobile-apps img, .social-media img{
+    width:50%;
+   
+  }
 }
 

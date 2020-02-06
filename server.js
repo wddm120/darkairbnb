@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs  = require('express-handlebars');
 const app = express();
 const port = 3000;
+const bodyParser = require('body-parser');
 
 const settings = {
     imagePath: `img/rooms/`,
@@ -12,6 +13,9 @@ const settings = {
 
 //This allows express to make my static content available from the public
 app.use(express.static('public'))
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
 //This tells Express to set or register Handlebars as its' Template/View Engine
 app.engine('hbs', exphbs({
@@ -32,27 +36,87 @@ app.set('view engine', 'hbs');
 //set up routes
 app.get('/',(req,res)=>{
     res.render('index',{
-        title: "Home",
-        headingInfo : "Home Page"
-        
-        // randomContent: "BLAH BLAH BLHA"
+        title: "Home"
+
     });
     
 });
 
 
-app.get('/user-registration',(req,res)=>{
-  res.render('userregistration',{
-      title: "User Registration",
-      headingInfo : "User Registration Page",
+app.get('/signup',(req,res)=>{
+  res.render('signup',{
+      title: "User Registration"
+      
   });
 });
+
+app.post('/signup',(req,res)=>{
+  const errors= [];
+
+  if(req.body.email=="")
+  {
+    errors.push("Email is required");
+  }
+  if(req.body.fistName=="")
+  {
+    errors.push("First name is required");
+  }
+  if(req.body.password=="")
+  {
+    errors.push("Password is required");
+    if(req.body.password=="a")
+    {
+      errors.push("okay")
+    }
+  }
+
+  if(errors.length > 0)
+  {
+    res.render("signup",{
+      messages : errors
+    })
+  }
+  else
+  {
+    res.render("signup",{
+      messages : "okay"
+    })
+  }
+});
+
 
 app.get('/login',(req,res)=>{
   res.render('login',{
       title: "Login"
-      // headingInfo : "User Registration Page",
+
   });
+});
+
+app.post('/login',(req,res)=>{
+  const errors= [];
+
+  if(req.body.email=="")
+  {
+    errors.push("Email is required");
+  }
+  if(req.body.password=="")
+  {
+    errors.push("Password is required");
+  }
+
+  if(errors.length > 0)
+  {
+    res.render("login",{
+      messages : errors
+    })
+  }
+  else
+  {
+    res.render("login",{
+      messages : "okay"
+    })
+  }
+
 });
 
 // app.get("/contact-us",(req,res)=>{
@@ -131,7 +195,6 @@ app.get('/room-listing',(req,res)=>{
 
     res.render('roomlisting',{
         title: "Room Listing",
-        // headingInfo : "Room Listing",
         rooms : allRooms
 
     });
@@ -146,4 +209,4 @@ app.listen(port,()=>{
 // handle 404 responses
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
-  })
+})

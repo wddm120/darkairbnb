@@ -2,6 +2,7 @@
   display: grid;
   padding: 0 0.5rem;
   column-gap: 0.5rem;
+
 }
 
 .room-info{
@@ -29,6 +30,8 @@
   max-width: 15%;
   
 }
+
+
 
 /* .product{
   text-align: center;
@@ -65,6 +68,16 @@
     
   }
 
+  .zoom {
+ 
+    transition: transform .2s; /* Animation */
+  
+  }
+  
+  .zoom:hover {
+    transform: scale(1.15); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
 }
 
 @media(min-width: 800px){
@@ -86,6 +99,7 @@
 @media(min-width: 1000px){
   .room{
     grid-template-columns: repeat(6, 1fr);
+    
   }
 
   .star-img{
@@ -95,6 +109,7 @@
 
   .room-info{
     font-size: 0.9rem;
+    
   }
 
 }

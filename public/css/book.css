@@ -20,9 +20,10 @@
   text-shadow: 0 1px var(--light);
 }
 
-/* .book fieldset {
-  margin: 0.5rem;
-} */
+.book fieldset {
+  margin: 0;
+  /* padding: 0; */
+}
 
 .in-out{
 display: flex;
