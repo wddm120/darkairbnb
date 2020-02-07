@@ -26,7 +26,7 @@ app.engine('hbs', exphbs({
 
 }));
 
-// hbs.registerPartials(__dirname + '/views/partials');
+
 
 //set the view engine to use handlebars
 app.set('view engine', 'hbs');
@@ -35,9 +35,56 @@ app.set('view engine', 'hbs');
 
 //set up routes
 app.get('/',(req,res)=>{
-    res.render('index',{
-        title: "Home"
 
+  const promoRooms =[
+    { //0
+      id : 101,
+      roomImg : settings.imagePath+`img01.jpg`,
+      starImg: settings.starsPath+`2stars.png`,
+      title: `Promo1`,
+      description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+      price: 66
+    },{ //1
+      id : 102,
+      roomImg : settings.imagePath+`img02.jpg`,
+      starImg: settings.starsPath+`3stars.png`,
+      title: `Joshua Tree ...`,
+      description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+      price: 159
+    },{ //2
+      id : 103,
+      roomImg : settings.imagePath+`img03.jpg`,
+      starImg: settings.starsPath+`4stars.png`,
+      title: `1 Bdrm Modern ...`,
+      description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+      price: 99 
+    },{ //3
+      id : 104,
+      roomImg : settings.imagePath+`img04.jpg`,
+      starImg: settings.starsPath+`1star.png`,
+      title: `Entire Chalet. South Lake ...`,
+      description: `The Lake Tahoe Chalet`,
+      price: 249
+    },{ //4
+      id : 105,
+      roomImg : settings.imagePath+`img05.jpg`,
+      starImg: settings.starsPath+`0star.png`,
+      title: `Entire house ...`,
+      description: `The Lake Tahoe Chalet`,
+      price: 149 
+    },{ //5
+      id : 106,
+      roomImg : settings.imagePath+`img06.jpg`,
+      starImg: settings.starsPath+`5stars.png`,
+      title: `Hector Cave House`,
+      description: `Hector Cave House, carved into the unique caldera cliff for more than 250 years, was originally used as a wine cellar.`,
+      price: 572
+    }
+  ];
+
+    res.render('index',{
+        title: "Home",
+        indexRooms : promoRooms
     });
     
 });
@@ -64,24 +111,22 @@ app.post('/signup',(req,res)=>{
   if(req.body.password=="")
   {
     errors.push("Password is required");
-    if(req.body.password=="a")
-    {
-      errors.push("okay")
-    }
+    
+  }
+  if(req.body.password.length<8)
+  {
+    errors.push("use at least 8 characters");
   }
 
   if(errors.length > 0)
   {
-    res.render("signup",{
+    res.render('signup',{
       messages : errors
     })
   }
-  else
-  {
-    res.render("signup",{
-      messages : "okay"
-    })
-  }
+  res.render('login',{
+    messages : "okay"
+  })
 });
 
 
@@ -106,13 +151,13 @@ app.post('/login',(req,res)=>{
 
   if(errors.length > 0)
   {
-    res.render("login",{
+    res.render('login',{
       messages : errors
     })
   }
   else
   {
-    res.render("login",{
+    res.render('login',{
       messages : "okay"
     })
   }
@@ -130,7 +175,8 @@ app.post('/login',(req,res)=>{
 
 // });
 
-app.get('/room-listing',(req,res)=>{
+
+app.get('/roomlisting',(req,res)=>{
 
 
     // const fakeDB= [];
@@ -148,47 +194,46 @@ app.get('/room-listing',(req,res)=>{
 
     const allRooms =[
       { //0
-        id : 101,
+        id : 110,
         roomImg : settings.imagePath+`img01.jpg`,
         starImg: settings.starsPath+`2stars.png`,
         title: `Hidden Gem of ...`,
         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
         price: 66
       },{ //1
-        id : 102,
+        id : 111,
         roomImg : settings.imagePath+`img02.jpg`,
         starImg: settings.starsPath+`3stars.png`,
         title: `Joshua Tree ...`,
         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
         price: 159
       },{ //2
-        id : 103,
+        id : 112,
         roomImg : settings.imagePath+`img03.jpg`,
         starImg: settings.starsPath+`4stars.png`,
         title: `1 Bdrm Modern ...`,
         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
         price: 99 
       },{ //3
-        id : 104,
+        id : 113,
         roomImg : settings.imagePath+`img04.jpg`,
         starImg: settings.starsPath+`1star.png`,
         title: `Entire Chalet. South Lake ...`,
         description: `The Lake Tahoe Chalet`,
         price: 249
       },{ //4
-        id : 105,
+        id : 114,
         roomImg : settings.imagePath+`img05.jpg`,
         starImg: settings.starsPath+`0star.png`,
         title: `Entire house ...`,
         description: `The Lake Tahoe Chalet`,
         price: 149 
       },{ //5
-        id : 106,
+        id : 115,
         roomImg : settings.imagePath+`img06.jpg`,
         starImg: settings.starsPath+`5stars.png`,
-        title: `Unique Architecture ...`,
-        description: `Entire home, Sparkling clean, Laskarina is a Superhost, 	
-        Great location`,
+        title: `Hector Cave House`,
+        description: `Hector Cave House, carved into the unique caldera cliff for more than 250 years, was originally used as a wine cellar.`,
         price: 572
       }
     ];
@@ -199,6 +244,7 @@ app.get('/room-listing',(req,res)=>{
 
     });
 });
+
 
 
 app.listen(port,()=>{

@@ -1,14 +1,5 @@
-<main class="wrapper">
-  
- 
-  <div class="main-section">
-     {{>book}}
-  </div>
-  {{!-- <p>Places to stay around Canada</p> --}}
-  {{!-- {{>promorooms}} --}}
-  <div class="room">
-    
-{{#each indexRooms }}
+<div class="room">
+{{#each promoRooms }}
 <ul class="room-info zoom">
    <li><img src={{this.roomImg}}></li>
    <li class="top-room-info">
@@ -19,4 +10,5 @@
 </ul>
 {{/each}}
 </div>
-</main> 
+{{!-- <div class="pagenumbers" id="pagination"></div><br> --}}
+
