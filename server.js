@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 
 const settings = {
     imagePath: `img/rooms/`,
-    starsPath: `img/stars/`
+    starsPath: `img/stars/`,
+    sliderPath: `img/sliders/`
   }
 
 
@@ -26,7 +27,10 @@ app.engine('hbs', exphbs({
 
 }));
 
-
+const sliders = [{
+    sliderImg: settings.sliderPath+`slider01.jpg`
+  }
+];
 
 //set the view engine to use handlebars
 app.set('view engine', 'hbs');
@@ -84,15 +88,22 @@ app.get('/',(req,res)=>{
 
     res.render('index',{
         title: "Home",
-        indexRooms : promoRooms
+        indexRooms : promoRooms,
+        carousel : sliders
     });
     
 });
 
+// app.get('/login',(req,res)=>{
+//   res.render('login',{
+//       title: "Login"
+
+//   });
+// });
 
 app.get('/signup',(req,res)=>{
   res.render('signup',{
-      title: "User Registration"
+      title: "Sign-In"
       
   });
 });

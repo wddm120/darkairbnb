@@ -1,4 +1,4 @@
-.login, .sign-up {
+.login, .sign-up, .promo {
   /* position: relative; */
   margin: 0.5rem auto;
   padding: 0.5rem;
@@ -10,7 +10,7 @@
   
 }
 
-.login h1, .sign-up h1 {
+.login h1, .sign-up h1, .promo {
   margin: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
@@ -48,7 +48,7 @@
   cursor: pointer;
 }
 
-.login p.submit, .sign-up p.submit {
+.login p.submit, .sign-up p.submit, .promo p.submit {
   text-align: right;
   margin: 0.5rem;
 
@@ -108,14 +108,14 @@ input[type=submit] {
 
 /* MEDIA QUERIES */
 @media(min-width: 600px){
-  .login, .sign-up {
+  .login, .sign-up, .promo{
     width: 80%;  
     margin: 1rem auto;
   }
 }
 
 @media(min-width: 800px){
-  .login, .sign-up {
+  .login, .sign-up, .promo {
     width: 60%; 
     margin: 2rem auto;
   }
