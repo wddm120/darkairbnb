@@ -43,45 +43,44 @@ app.get('/',(req,res)=>{
   const promoRooms =[
     { //0
       id : 101,
-      roomImg : settings.imagePath+`img01.jpg`,
+      roomImg : settings.imagePath+`img20.png`,
       starImg: settings.starsPath+`2stars.png`,
-      title: `Promo1`,
-      description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+      title: `Walnut TREEHOUSE`,
+      description: `You’ll have the treehouse to yourself`,
       price: 66
     },{ //1
       id : 102,
-      roomImg : settings.imagePath+`img02.jpg`,
+      roomImg : settings.imagePath+`img21.png`,
       starImg: settings.starsPath+`3stars.png`,
-      title: `Joshua Tree ...`,
-      description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+      title: `Treehouse + Cabin Retreat`,
+      description: `The Treehouse Retreat + Cabin Retreat ...`,
       price: 159
     },{ //2
       id : 103,
-      roomImg : settings.imagePath+`img03.jpg`,
+      roomImg : settings.imagePath+`img22.png`,
       starImg: settings.starsPath+`4stars.png`,
-      title: `1 Bdrm Modern ...`,
-      description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+      title: `River Eye - Treehouse`,
+      description: `Experience being in the trees, looking ...`,
       price: 99 
     },{ //3
       id : 104,
-      roomImg : settings.imagePath+`img04.jpg`,
+      roomImg : settings.imagePath+`img23.png`,
       starImg: settings.starsPath+`1star.png`,
-      title: `Entire Chalet. South Lake ...`,
-      description: `The Lake Tahoe Chalet`,
+      title: `THE MAJESTIC TREEHOUSE romantic, luxury retreat ...`,
       price: 249
     },{ //4
       id : 105,
-      roomImg : settings.imagePath+`img05.jpg`,
+      roomImg : settings.imagePath+`img24.png`,
       starImg: settings.starsPath+`0star.png`,
-      title: `Entire house ...`,
-      description: `The Lake Tahoe Chalet`,
+      title: `Forest Camping Hut`,
+      description: `Enjoy a private redwood forest camping hut ...`,
       price: 149 
     },{ //5
       id : 106,
-      roomImg : settings.imagePath+`img06.jpg`,
+      roomImg : settings.imagePath+`img25.png`,
       starImg: settings.starsPath+`5stars.png`,
-      title: `Hector Cave House`,
-      description: `Hector Cave House, carved into the unique caldera cliff for more than 250 years, was originally used as a wine cellar.`,
+      title: `The ReTreet House`,
+      description: `Be a part of nature and stay at a house among the trees ...`,
       price: 572
     }
   ];
@@ -104,7 +103,6 @@ app.get('/',(req,res)=>{
 app.get('/signup',(req,res)=>{
   res.render('signup',{
       title: "Sign-In"
-      
   });
 });
 
@@ -123,21 +121,22 @@ app.post('/signup',(req,res)=>{
   {
     errors.push("Password is required");
     
-  }
-  if(req.body.password.length<8)
+  }else if(req.body.password.length<8)
   {
     errors.push("use at least 8 characters");
+  }else{
+    errors.push("Okay");
   }
-
+  
   if(errors.length > 0)
   {
     res.render('signup',{
       messages : errors
-    })
+    });
+  }else{
+    errors.push("Okay");
   }
-  res.render('login',{
-    messages : "okay"
-  })
+
 });
 
 
@@ -164,13 +163,9 @@ app.post('/login',(req,res)=>{
   {
     res.render('login',{
       messages : errors
-    })
-  }
-  else
-  {
-    res.render('login',{
-      messages : "okay"
-    })
+    });
+  }else{
+    errors.push("Okay");
   }
 
 });

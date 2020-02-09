@@ -28,19 +28,23 @@ body{
   width: 100%;
 } */
 
-h1{
+/* h1{
   padding: 0.5rem;
+  text-align: left;
 }
 
 h2{
   margin-left: 1rem;
   padding: 0.5rem;
+  text-align: left;
 }
 
 h3{
   margin: 0;
   font-weight: bold;
-}
+  color: var(--dark);
+  text-align: left;
+} */
 
 
 /* fieldset {
@@ -386,7 +390,7 @@ width: 38%;
 
 @media(min-width: 800px){
 
-  .logo, .signin, .promo {
+  .logo, .signin{
     width: 50%;
   }
 
@@ -407,7 +411,7 @@ width: 38%;
 }
 
 @media(min-width: 900px){
-  .logo, .signin, .promo {
+  .logo, .signin {
     width: 40%;
   }
 

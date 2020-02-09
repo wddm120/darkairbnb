@@ -1,5 +1,4 @@
-.login, .sign-up, .promo {
-  /* position: relative; */
+.login, .sign-up {
   margin: 0.5rem auto;
   padding: 0.5rem;
   width: 100%;
@@ -10,7 +9,7 @@
   
 }
 
-.login h1, .sign-up h1, .promo {
+.login h1, .sign-up h1 {
   margin: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
@@ -19,6 +18,8 @@
   text-shadow: 0 1px var(--light);
 
 }
+
+
 
 .login p, .sign-up p {
   margin: 0.5rem;
@@ -29,7 +30,7 @@
 }
 
 
-.login input[type=text], .login input[type=password] {
+.login input[type=text], .login input[type=password],.sign-up input[type=text], .sign-up input[type=password] {
   width: 100%;
   max-width: 80%;
   margin-left: auto;
@@ -48,7 +49,7 @@
   cursor: pointer;
 }
 
-.login p.submit, .sign-up p.submit, .promo p.submit {
+.login p.submit, .sign-up p.submit {
   text-align: right;
   margin: 0.5rem;
 
@@ -81,7 +82,6 @@
   font-size: 13px;
 }
 
-
 input[type=text], input[type=password] {
   margin: 0.25rem 0;
   padding: 0.5rem;
@@ -94,7 +94,7 @@ input[type=text], input[type=password] {
 
 }
 
-input[type=submit] {
+.login input[type=submit], .sign-up input[type=submit] {
   padding: 0 18px;
   height: 29px;
   font-weight: bold;

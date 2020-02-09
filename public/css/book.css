@@ -1,6 +1,5 @@
 .book{
-  
-  margin: 0.5rem auto;
+  margin: 0 auto;
   padding: 0.5rem;
   width: 100%;
   background: var(--light);
@@ -22,7 +21,7 @@
 
 .book fieldset {
   margin: 0;
-  /* padding: 0; */
+
 }
 
 .in-out{
@@ -64,10 +63,9 @@ input[type=search], input[type=text], input[type=date], fieldset{
   border-color: #c4c4c4 #d1d1d1 #d4d4d4;
   border-radius: 2px;
 
-
 }
 
-input[type=submit] {
+.book input[type=submit] {
   padding: 0 18px;
   height: 29px;
   font-weight: bold;
@@ -82,18 +80,18 @@ input[type=submit] {
 /* MEDIA QUERIES */
 @media(min-width: 600px){
   .book {
-    display: block;
+    /* display: block; */
     width: 70%;  
-    margin: 1rem auto;
-    border: solid 1px;
+    /* margin: 1rem auto; */
+   
   }
 }
 
 @media(min-width: 800px){
   .book {
     width: auto; 
-    margin: 2rem 0;
-    margin-top: 0;
+    
+  
  
     
   }
