@@ -371,10 +371,7 @@ width: 38%;
 
   }
   
-  .products{
-    grid-template-columns: repeat(2, 1fr);
 
-  }  
 
   /* FOOTER */
   .mobile-apps, .social-media{

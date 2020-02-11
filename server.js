@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 
 const settings = {
     imagePath: `img/rooms/`,
-    starsPath: `img/stars/`,
-    sliderPath: `img/sliders/`
+    starsPath: `img/stars/`
+    // sliderPath: `img/sliders/`
   }
 
 
@@ -27,10 +27,10 @@ app.engine('hbs', exphbs({
 
 }));
 
-const sliders = [{
-    sliderImg: settings.sliderPath+`slider01.jpg`
-  }
-];
+// const sliders = [{
+//     sliderImg: settings.sliderPath+`slider01.jpg`
+//   }
+// ];
 
 //set the view engine to use handlebars
 app.set('view engine', 'hbs');
@@ -87,8 +87,8 @@ app.get('/',(req,res)=>{
 
     res.render('index',{
         title: "Home",
-        indexRooms : promoRooms,
-        carousel : sliders
+        indexRooms : promoRooms
+        // carousel : sliders
     });
     
 });
