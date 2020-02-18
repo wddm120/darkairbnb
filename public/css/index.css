@@ -393,6 +393,7 @@ width: 38%;
 
   .wrapper{
     grid-template-columns: 50% 50%;
+    
   }
 
  
@@ -412,9 +413,10 @@ width: 38%;
     width: 40%;
   }
 
-  /* .products{
-    grid-template-columns: repeat(6, 1fr);
-  } */
+  .wrapper{
+    grid-template-columns: 45% 55%;
+    
+  }
  
   .mobile-apps img, .social-media img{
     width:50%;

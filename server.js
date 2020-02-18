@@ -113,6 +113,10 @@ app.post('/signup',(req,res)=>{
   {
     errors.push("Email is required");
   }
+  if(req.body.phoneNumber=="")
+  {
+    errors.push("Phone number is required");
+  }
   if(req.body.fistName=="")
   {
     errors.push("First name is required");
@@ -134,7 +138,27 @@ app.post('/signup',(req,res)=>{
       messages : errors
     });
   }else{
-    errors.push("Okay");
+    // errors.push("Okay");
+    {
+      const accountSid = 'PUT YOUR ACCOUNT SID HERE';
+      const authToken = 'PUT HERE YOUR AUTHTOKEN HERE';
+      const client = require('twilio')(accountSid, authToken);
+      
+      client.messages
+        .create({
+           body: `${req.body.firstName} ${req.body.lastName} Message :${req.body.message}`,
+           from: 'PUT YOUR TRIAL NUMBER HERE',
+           to: `${req.body.phoneNumber}`
+         })
+        .then(message => {
+          console.log(message.sid);
+          res.render("index");
+        })
+        .catch((err)=>{
+            console.log(`Error ${err}`);
+        })
+  
+    }
   }
 
 });
