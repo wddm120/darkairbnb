@@ -20,13 +20,18 @@
 }
 
 
-.login p, .sign-up p {
+.login p, .sign-up p{
   margin: 0.5rem;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   color: var(--dark);
 
+}
+
+.sign-up p.tos-privacy a{
+  color:var(--dark);
+  text-decoration: underline;
 }
 
 
@@ -38,13 +43,13 @@
 
 }
 
-.login p.remember_me, .sign-up p.dont_want_receive{
+.login p.remember_me, .sign-up p.dont_want_receive, .sign-up p.tos-privacy{
   text-align: left;
   margin: 0 0.5rem;
 
 }
 
-.login p.remember_me label, .sign-up p.dont_want_receive {
+.login p.remember_me label, .sign-up p.dont_want_receive label, .sign-up p.tos-privacy label{
   color: #777;
   cursor: pointer;
 }
@@ -110,16 +115,18 @@ input[type=text], input[type=password] {
   color: var(--dark);
 }
 
+
+
 /* MEDIA QUERIES */
 @media(min-width: 600px){
-  .login, .sign-up, .promo{
+  .login, .sign-up{
     width: 80%;  
     margin: 1rem auto;
   }
 }
 
 @media(min-width: 800px){
-  .login, .sign-up, .promo {
+  .login, .sign-up{
     width: 60%; 
     margin: 2rem auto;
   }
