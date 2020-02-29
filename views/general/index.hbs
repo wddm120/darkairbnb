@@ -1,0 +1,27 @@
+<main class="wrapper">
+   {{!-- <div class="promo-section">
+     {{>promo}}
+  </div> --}}
+
+<div class="main-section">
+   {{>verified-user}}
+   {{>promo}}
+   {{>book}}
+</div>
+{{>promo-rooms}}
+
+{{!-- <p>Places to stay around Canada</p> --}}
+
+{{!-- <div class="room" id="promo">
+   {{#each rooms }}
+   <ul class="room-info zoom">
+      <li><img src={{this.roomImg}}></li>
+      <li class="top-room-info">
+         <h3>{{this.title}}</h3><img src={{this.starImg}} class="star-img">
+      </li>
+      <li><label>{{this.description}}</label></li>
+      <li><label>${{this.price}} CAD / night</label></li>
+   </ul>
+   {{/each}}
+</div> --}}
+</main>

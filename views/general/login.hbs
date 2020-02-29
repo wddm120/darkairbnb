@@ -1,0 +1,24 @@
+<div class="login">
+  <h1>Login to Dark Airbnb</h1>
+  <form method="POST" action="/login">
+    <p><input type="text" name="email" value="" placeholder="Email address"></p>
+    <p><input type="password" name="password" value="" placeholder="Password"></p>
+    <p class="remember_me">
+      <label>
+        <input type="checkbox" name="remember_me" id="remember_me">
+        Remember me on this computer
+      </label>
+    </p>
+    <p class="submit"><input type="submit" name="commit" value="Login"></p>
+  </form>
+  {{#each messages}}
+  <div class="errors">{{this}}</div>
+  {{/each}}
+</div>
+
+<div class="login-help">
+  <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
+</div>
+<div class="sign-up-help">
+  <p>Don’t have an account? <a href="/signup">Sign up</a></p>
+</div>
