@@ -5,6 +5,26 @@ const settings = {
   // sliderPath: `img/sliders/`
 }
 
+// const user = 
+// {
+//   fakeUser :[],
+  
+//   init()
+//   {
+//     this.fakeUser.push({
+//       fName : req.body.fistName
+//     });
+    
+//   },
+//   getUsers()
+//   {
+//     return this.fakeUser;
+//   }
+
+// }
+// user.init();
+// module.exports=user;
+
 const room = 
 {
   fakeDB : [],
@@ -113,6 +133,8 @@ const room =
 
 room.init();
 module.exports=room;
+
+
 
 
 

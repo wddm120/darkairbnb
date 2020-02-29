@@ -1,17 +1,18 @@
+<div class="contact-us">
 <h1>CONTACT US</h1>
-<form action="">
-    <label for="firstName">First Name</label>
-    <input type="text" id="firstName"> <br>
-
-    <label for="lastName">Last Name</label>
-    <input type="text" id="lastName"> <br>
-
-    <label for="phoneNo">Phone No</label>
-    <input type="text" id="phoneNo"> <br>
-
-    <label for="message">Message</label>
-   <textarea name="" id="message"></textarea><br>
-
-   <input type="button" value="Submit">
+<p>We'd love to hear from you, please drop us a line if you've any query</p>
+<form action="/contact-us" method="POST">
+    <p><label for="fullname">Full Name *</label></p>
+    <p><input type="text" id="fullname"></p>
+    <p><label for="email">E-mail *</label></p>
+    <p><input type="text" id="email"></p>
+    <p><label for="message">Message *</label></p>
+    <p><textarea name="" id="message" rows="5"></textarea></p>
+    {{!-- <input type="button" value="Submit"> --}}
+    <p class="submit"><input type="submit" name="submit" value="Submit"></p>
 
 </form>
+{{#each messages}}
+<div class="errors">{{this}}</div>
+{{/each}}
+</div>

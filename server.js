@@ -32,6 +32,7 @@ app.set('view engine', 'hbs');
 
 
 //set up routes
+// Home route
 app.get('/', (req, res) => {
   res.render('index', {
     title: "Home",
@@ -48,46 +49,65 @@ app.get('/', (req, res) => {
 //   });
 // });
 
-app.get('/signup',(req,res)=>{
-  res.render('signup',{
+
+// Signup route
+app.get(`/signup`,(req,res)=>{
+  res.render(`signup`,{
       title: "Sign-In"
   });
 });
 
-app.post('/signup', (req, res) => {
-  const errors = [];
-  const userReg = [];
+// app.get('/signup', function(request, response){
+//   return response.render('signup');
+// });
 
+app.post(`/signup`,(req, res) => {
+  // console.log(req.body);
+  const errors = [];
+  // const userReg = [];
+  
+  // let userReg = {
+  //   uEmail: req.body.email,
+  //   uPhoneNumer :req.body.phoneNumber
+  // }
+
+  
   if (req.body.email == "") {
     errors.push("Email is required");  
   }
-  if (req.body.phoneNumber == "") {
-    errors.push("Phone number is required"); 
-  }
-  if (req.body.fistName == "") {
-    errors.push("First name is required");
-  }
-  if (req.body.password == "") {
-    errors.push("Password is required");
-  } else if (req.body.password.length < 8) {
-    errors.push("use at least 8 characters");
-  } 
-  else {
-    userReg.push(`${req.body.email}`);
-    userReg.push(`${req.body.phoneNumber}`);
-    userReg.push(`${req.body.fistName}`);
+  // if (req.body.phoneNumber == "") {
+  //   errors.push("Phone number is required"); 
+  // }
+  // if (req.body.firstName == "") {
+  //   errors.push("First name is required");
+  // }
+  // if (req.body.password == "") {
+  //   errors.push("Password is required");
+  // } else if (req.body.password.length < 8) {
+  //   errors.push("use at least 8 characters");
+  // } 
+  // else {
+  //   userReg.push(`${req.body.email}`);
+  //   userReg.push(`${req.body.phoneNumber}`);
+  //   userReg.push(`${req.body.firstName}`);
 
-  }
+  // }
+
   if (errors.length > 0) {
-    res.render('signup', {
+    res.render(`signup`, {
       messages: errors
     });
   } else {
-    res.render('index', {
+    res.render(`index`, {
       title: "Home",
-      userRegInfo: userReg,
+      userReg : req.body,
+      // userRegInfo:productModel.getUsers(),
+      // verivyContent : "We sent an sent email to " + userReg.push(`${req.body.firstName}`) +". To continue, please check your email and verify your account. Didn't receive email?",
+
       rooms: productModel.getAllRooms()
+     
     });
+    
     // {
     //   const accountSid = 'PUT YOUR ACCOUNT SID HERE';
     //   const authToken = 'PUT HERE YOUR AUTHTOKEN HERE';
@@ -107,20 +127,19 @@ app.post('/signup', (req, res) => {
     //       console.log(`Error ${err}`);
     //     })
     // }
-    
   }
- 
 });
 
 
-app.get('/login',(req,res)=>{
-  res.render('login',{
+// Login route
+app.get(`/login`,(req,res)=>{
+  res.render(`login`,{
       title: "Login"
 
   });
 });
 
-app.post('/login',(req,res)=>{
+app.post(`/login`,(req,res)=>{
   const errors= [];
 
   if(req.body.email=="")
@@ -134,7 +153,7 @@ app.post('/login',(req,res)=>{
 
   if(errors.length > 0)
   {
-    res.render('login',{
+    res.render(`login`,{
       messages : errors
     });
   }else{
@@ -143,21 +162,25 @@ app.post('/login',(req,res)=>{
 
 });
 
-// app.get("/contact-us",(req,res)=>{
 
-//     res.render("contactus",{
-//         title: "Contact Us",
-//         headingInfo : "Contact Us Page",
+//Contact us route
+app.get(`/contact-us`,(req,res)=>{
+    res.render("contactus",{
+        title: "Contact Us",
+        headingInfo : "Contact Us Page",
+    });
 
-//     });
+});
+
+//process 
+app.post(`/contact-us`,(req,res)=>{
+  res.render(`contactus`);
+});
 
 
-// });
-
-
-app.get('/rooms',(req,res)=>{
-
-    res.render('roomlisting',{
+// show all rooms
+app.get(`/rooms`,(req,res)=>{
+    res.render(`roomlisting`,{
         title : "Room Listing Page",
         // rooms : allRooms
         rooms : productModel.getAllRooms()
@@ -165,25 +188,18 @@ app.get('/rooms',(req,res)=>{
     });
 });
 
+//show add room form
+app.get(`/room/add`,(req,res)=>{
+  res.render();
+});
 
-// app.get("/products",(req,res)=>{
-
-//   res.render("product",{
-//       title:"Room Listing Page",
-//       products : productModel.getallProducts()
-//   });
-
-// });
-
-// app.post("/products",(req,res)=>{
-
-//   //When the form is submitted
-// })
-
+// when user submits form
+app.post(`/room/add`,(req,res)=>{
+  res.render();
+});
 
 
 app.listen(port,()=>{
-
     console.log(`Web server is up and running on port ${port}!`)
 })
 
