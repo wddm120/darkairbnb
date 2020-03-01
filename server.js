@@ -37,8 +37,6 @@ app.use("/rooms",roomController);
 // ];
 
 
-
-
 //Setup server
 app.listen(port,()=>{
     console.log(`Web server is up and running on port ${port}!`)

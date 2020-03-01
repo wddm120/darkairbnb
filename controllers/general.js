@@ -35,7 +35,7 @@ router.get(`/signup`,(req,res)=>{
 router.post(`/signup`,(req, res) => {
   // console.log(req.body);
   const errors = [];
-  // const userReg = [];
+  const {email,phoneNumber,firstName} = req.body;
   
   // let userReg = {
   //   uEmail: req.body.email,
@@ -70,14 +70,16 @@ router.post(`/signup`,(req, res) => {
     });
   } else {
     res.render(`general/index`, {
-      title: "Home",
-      userReg : req.body,
-      // userRegInfo:productModel.getUsers(),
-      // verivyContent : "We sent an sent email to " + userReg.push(`${req.body.firstName}`) +". To continue, please check your email and verify your account. Didn't receive email?",
-
+      // title: "Home",
+      // userReg : req.body,
+      replyMsg : "We sent an sent email to " +`${email}`+ " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
       rooms: productModel.getAllRooms()
-     
+
     });
+
+
+   
+
     
     // {
     //   const accountSid = 'PUT YOUR ACCOUNT SID HERE';
@@ -105,7 +107,8 @@ router.post(`/signup`,(req, res) => {
 // Login route
 router.get(`/login`,(req,res)=>{
   res.render(`general/login`,{
-      title: "Login"
+      title: "Login",
+      headingInfo : "Login to Dark Airbnb"
 
   });
 });
@@ -138,14 +141,68 @@ router.post(`/login`,(req,res)=>{
 router.get(`/contact-us`,(req,res)=>{
     res.render(`general/contactus`,{
         title: "Contact Us",
-        headingInfo : "Contact Us Page",
+        headingInfo : "CONTACT US",
     });
 
 });
 
 //process 
 router.post(`/contact-us`,(req,res)=>{
-  res.render(`general/contactus`);
+  const errors = [];
+  const {fullName,email,message} = req.body;
+
+  if (req.body.fullName == "") {
+    errors.push("Full name is required");  
+  }
+  if (req.body.email == "") {
+    errors.push("Email is required");  
+  }
+  if (req.body.message == "") {
+    errors.push("Message is required");  
+  }
+  if (errors.length > 0) {
+    res.render(`general/contactus`, {
+      messages: errors
+    });
+  } else {
+    // console.log(req.body);
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: `n01398965@humbermail.ca`,
+      from: `${email}`,
+      subject: 'Contact Us Form Submit',
+      // text: 'and easy to do anywhere, even with Node.js',
+      html: 
+      `
+      <p>Visitor's Full Name : ${fullName}</p>
+      <p>Visitor's Email Address : ${email}</p>
+      <p>Visitor's Message : ${message}</p>
+      <strong>and easy to do anywhere, even with Node.js</strong>
+      `,
+    };
+    
+    //Async operation, when you don't know how long it takes
+    sgMail.send(msg)
+    .then(()=>{
+      res.redirect("/", {
+        // title: "Home",
+        // userReg: req.body,
+        replyMsg: "Thank you for contacting us. We will respond to you as soon as possible."
+        // rooms: productModel.getAllRooms()
+      });
+    })
+    .catch(err=>{
+      console.log(`Err ${err}`);
+    })
+
+    // res.render(`general/index`, {
+    //   title: "Home",
+    //   userReg: req.body,
+    //   replyMsg: "Thank you for contacting us. We will respond to you as soon as possible.",
+    //   rooms: productModel.getAllRooms()
+    // });
+  }
 });
 
 module.exports = router;

@@ -1,5 +1,8 @@
 <div class="login">
-  <h1>Login to Dark Airbnb</h1>
+  {{#each messages}}
+  <div class="errors">{{this}}</div>
+  {{/each}}
+  <h1>{{headingInfo}}</h1>
   <form method="POST" action="/login">
     <p><input type="text" name="email" value="" placeholder="Email address"></p>
     <p><input type="password" name="password" value="" placeholder="Password"></p>
@@ -11,11 +14,7 @@
     </p>
     <p class="submit"><input type="submit" name="commit" value="Login"></p>
   </form>
-  {{#each messages}}
-  <div class="errors">{{this}}</div>
-  {{/each}}
 </div>
-
 <div class="login-help">
   <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
 </div>

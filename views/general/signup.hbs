@@ -1,4 +1,7 @@
 <div class="sign-up">
+  {{#each messages}}
+  <div class="errors">{{this}}</div>
+  {{/each}}
   <form method="POST" action="/signup">
     <p><input type="text" name="email" value="" placeholder="Email address">*</p>
     <p><input type="text" name="phoneNumber" value="" placeholder="Phone number">*</p>
@@ -8,7 +11,8 @@
     <p class="tos-privacy">
       <label>
         <input type="checkbox" name="tos-privacy" id="tos-privacy" required>
-        I agree the <a href="#">Dark Airbnb's Terms of Service</a>, <a href="#">Payments Terms of Service </a>, <a href="#">Privacy Policy</a>, and <a href="#">Non discrimination Policy</a>.
+        I agree the <a href="#">Dark Airbnb's Terms of Service</a>, <a href="#">Payments Terms of Service </a>, <a
+          href="#">Privacy Policy</a>, and <a href="#">Non discrimination Policy</a>.
       </label>
     </p>
     <p class="dont_want_receive">
@@ -19,10 +23,6 @@
     </p>
     <p class="submit"><input type="submit" name="signup" value="Sign up"></p>
   </form>
-{{#each messages}}
-<div class="errors">{{this}}</div>
-{{/each}}
-
 </div>
 {{!-- <div class="login-help">
   <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>

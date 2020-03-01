@@ -124,7 +124,7 @@ padding: 0.5rem;
 }
 
 
-/* .user-reg-info {
+/* .verified-user {
   margin: 0.25rem auto;
   padding: 0.5rem;
   width: 100%;
@@ -134,19 +134,19 @@ padding: 0.5rem;
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
   
 } */
-.user-reg-info{
+.verified-user, .contactus-response{
   text-align: left;
   margin-left: auto;
   margin-right: auto;
   /* padding: 0.25rem; */
 }
 
-.user-reg-info h3{
+.verified-user h3, .contactus-response h3{
   color: var(--light);
   
 } 
 
-.user-reg-info a{
+.verified-user a{
   color: var(--link);
   text-decoration: underline;
 
@@ -284,7 +284,7 @@ padding: 0.5rem;
 
   }
 
-  .user-reg-info {
+  .verified-user, .contactus-response {
     display: block;
     width: 100%;  
    
