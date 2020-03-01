@@ -5,6 +5,7 @@ const productModel = require("../models/rooms");
 
 // Home route
 router.get('/', (req, res) => {
+  // console.log(process.env.SENDGRID_API_KEY);
   res.render('general/index', {
     title: "Home",
     // indexRooms : promoRooms

@@ -1,8 +1,11 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT;
 const bodyParser = require('body-parser');
+
+//load the environment variable file
+require('dotenv').config({path:"./config/keys.env"});
 
 
 // parse application/x-www-form-urlencoded
@@ -38,8 +41,8 @@ app.use("/rooms",roomController);
 
 
 //Setup server
-app.listen(port,()=>{
-    console.log(`Web server is up and running on port ${port}!`)
+app.listen(PORT,()=>{
+    console.log(`Web server is up and running on port ${PORT}!`)
 })
 
 // handle 404 responses
