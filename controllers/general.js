@@ -149,26 +149,28 @@ router.get(`/contact-us`,(req,res)=>{
 
 //process 
 router.post(`/contact-us`,(req,res)=>{
-  // const errors = [];
-  // const {fullName,email,message} = req.body;
+
+  // console.log(process.env.SENDGRID_API_KEY)
+  const errors = [];
+  const {fullName,email,message} = req.body;
   const sgMail = require('@sendgrid/mail');
 
     sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
     const msg = {
       to: 'n01398965@humbermail.ca',
-      from: 'test@example.com',
+      from: 'vahn_x@yahoo.com',
       subject: 'Sending with Twilio SendGrid is Fun',
       text: 'and easy to do anywhere, even with Node.js',
       html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
-    sgMail.send(msg);
-    // .then(()=>{
-    //       res.redirect("/");
-    //   })
-    //   .catch(err=>{
-    //       console.log(`Error ${err}`);
-    //   });
+    sgMail.send(msg)
+    .then(()=>{
+          res.redirect("/");
+      })
+      .catch(err=>{
+          console.log(`Error ${err}`);
+      });
 
 
     // const msg = {
