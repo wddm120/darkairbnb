@@ -2,6 +2,7 @@ const express = require ('express')
 const router = express.Router();
 //load rooms
 const productModel = require("../models/rooms");
+// const {email,phoneNumber,firstName,lastName,message} = req.body;
 
 // Home route
 router.get('/', (req, res) => {
@@ -36,13 +37,16 @@ router.get(`/signup`,(req,res)=>{
 router.post(`/signup`,(req, res) => {
   // console.log(req.body);
   const errors = [];
-  const {email,phoneNumber,firstName} = req.body;
-  
-  // let userReg = {
-  //   uEmail: req.body.email,
-  //   uPhoneNumer :req.body.phoneNumber
-  // }
+  const {email,phoneNumber,firstName,lastName} = req.body;
 
+  // TWILIO
+  const accountSid = (process.env.TWILIO_API_KEY);
+  const authToken = (process.env.TWILIO_AUTH_TOKEN);
+  const client = require('twilio')(accountSid, authToken);
+
+  // SEND_GRID
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
   
   if (req.body.email == "") {
     errors.push("Email is required");  
@@ -58,49 +62,61 @@ router.post(`/signup`,(req, res) => {
   } else if (req.body.password.length < 8) {
     errors.push("use at least 8 characters");
   } 
-  // else {
-  //   userReg.push(`${req.body.email}`);
-  //   userReg.push(`${req.body.phoneNumber}`);
-  //   userReg.push(`${req.body.firstName}`);
-
-  // }
 
   if (errors.length > 0) {
     res.render(`general/signup`, {
       messages: errors
     });
   } else {
-    res.render(`general/index`, {
-      // title: "Home",
-      // userReg : req.body,
-      replyMsg : "We sent an sent email to " +`${email}`+ " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
-      rooms: productModel.getAllRooms()
+    // console.log(req.body);
+    // console.log(accountSid);
+    // console.log(authToken);
 
-    });
+    const msg = {
+      to: 'n01398965@humbermail.ca',
+      from: `${email}`,
+      subject: 'Contact Us Form Submit',
+      // text: 'and easy to do anywhere, even with Node.js',ß
+      html:
+        `
+      <p>User :</p>
+      <p>First Name : ${firstName}</p>
+      <p>Last Name : ${lastName}</p>
+      <p>Email Address : ${email}</p>
+      <p>Phone Number : ${phoneNumber}</p>
+      `,
+    };
 
+    // SENDGRID
+    sgMail.send(msg)
+      //Asynchornous operation (who don't know how long this will take to execute)
+      // .then(() => {
+      //   res.redirect("/");
+      // })
+      .then(() => {
+        res.render("general/index", {
+          replyMsg: "We sent an email to " +`${email}`+ " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
+          rooms: productModel.getAllRooms()
+        });
+      })
+      .catch(err => {
+        console.log(`Error ${err}`);
+      });
 
-   
-
+      // TWILIO
+      client.messages
+        .create({
+          body: `Hi ${firstName} ${lastName}, Thank you for joining Dark Airbnb. Please check your email and verify your account`,
+          from: '+14805088297',
+          to: `${phoneNumber}`
+        })
+        .then(message => {
+          console.log(message.sid);
     
-    // {
-    //   const accountSid = 'PUT YOUR ACCOUNT SID HERE';
-    //   const authToken = 'PUT HERE YOUR AUTHTOKEN HERE';
-    //   const client = require('twilio')(accountSid, authToken);
-
-    //   client.messages
-    //     .create({
-    //       body: `${req.body.firstName} ${req.body.lastName} Message :${req.body.message}`,
-    //       from: '+14805088297',
-    //       to: `${req.body.phoneNumber}`
-    //     })
-    //     .then(message => {
-    //       console.log(message.sid);
-    //       res.render("index");
-    //     })
-    //     .catch((err) => {
-    //       console.log(`Error ${err}`);
-    //     })
-    // }
+        })
+        .catch((err) => {
+          console.log(`Error ${err}`);
+        })
   }
 });
 
@@ -132,7 +148,8 @@ router.post(`/login`,(req,res)=>{
       messages : errors
     });
   }else{
-    errors.push("Okay");
+    // errors.push("Okay");
+    res.redirect("/");
   }
 
 });
@@ -149,102 +166,55 @@ router.get(`/contact-us`,(req,res)=>{
 
 //process 
 router.post(`/contact-us`,(req,res)=>{
-
-  // console.log(process.env.SENDGRID_API_KEY)
   const errors = [];
-  const {fullName,email,message} = req.body;
+  const { fullName, email, message } = req.body;
   const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
-    sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
-
+  if (req.body.fullName == "") {
+    errors.push("Full name is required");
+  }
+  if (req.body.email == "") {
+    errors.push("Email is required");
+  }
+  if (req.body.message == "") {
+    errors.push("Message is required");
+  }
+  if (errors.length > 0) {
+    res.render(`general/contactus`, {
+      messages: errors
+    });
+  } else {
+    // console.log(req.body);
+    // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: 'n01398965@humbermail.ca',
-      from: 'vahn_x@yahoo.com',
-      subject: 'Sending with Twilio SendGrid is Fun',
-      text: 'and easy to do anywhere, even with Node.js',
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      from: `${email}`,
+      subject: 'Contact Us Form Submit',
+      // text: 'and easy to do anywhere, even with Node.js',ß
+      html:
+        `
+      <p>Visitor's Full Name : ${fullName}</p>
+      <p>Visitor's Email Address : ${email}</p>
+      <p>Visitor's Message : ${message}</p>
+      `,
     };
     sgMail.send(msg)
-    .then(()=>{
-          res.redirect("/");
+      //Asynchornous operation (who don't know how long this will take to execute)
+      // .then(() => {
+      //   res.redirect("/");
+      // })
+      .then(() => {
+        res.render("general/index", {
+          replyMsg: "Thank you for contacting us. We will respond to you as soon as possible.",
+          rooms: productModel.getAllRooms()
+        });
       })
-      .catch(err=>{
-          console.log(`Error ${err}`);
+      .catch(err => {
+        console.log(`Error ${err}`);
       });
+  }
 
-
-    // const msg = {
-    // to: `n01398965@humbermail.ca`,
-    // from: `${email}`,
-    // subject: 'Contact Us Form Submit',
-    // html: 
-    // `Vistor's Full Name ${fullName} <br>
-    //  Vistor's Email Address ${email} <br>
-    //  Vistor's message : ${message}<br>
-    // `,
-    // };
-
-    // //Asynchornous operation (who don't know how long this will take to execute)
-    // sgMail.send(msg)
-    // .then(()=>{
-    //     res.redirect("/");
-    // })
-    // .catch(err=>{
-    //     console.log(`Error ${err}`);
-    // });
-
-
-  // if (req.body.fullName == "") {
-  //   errors.push("Full name is required");  
-  // }
-  // if (req.body.email == "") {
-  //   errors.push("Email is required");  
-  // }
-  // if (req.body.message == "") {
-  //   errors.push("Message is required");  
-  // }
-  // if (errors.length > 0) {
-  //   res.render(`general/contactus`, {
-  //     messages: errors
-  //   });
-  // } else {
-  //   // console.log(req.body);
-  //   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  //   const msg = {
-  //     to: 'n01398965@humbermail.ca',
-  //     from: `${email}`,
-  //     subject: 'Contact Us Form Submit',
-  //     // text: 'and easy to do anywhere, even with Node.js',ß
-  //     html: 
-  //     `
-  //     <p>Visitor's Full Name : ${fullName}</p>
-  //     <p>Visitor's Email Address : ${email}</p>
-  //     <p>Visitor's Message : ${message}</p>
-      
-  //     `,
-  //   };
-    
-  //   //Async operation, when you don't know how long it takes to execute
-  //   sgMail.send(msg)
-  //   .then(()=>{
-  //     res.redirect("/", {
-  //       // title: "Home",
-  //       // userReg: req.body,
-  //       replyMsg: "Thank you for contacting us. We will respond to you as soon as possible."
-  //       // rooms: productModel.getAllRooms()
-  //     });
-  //   })
-  //   .catch(err=>{
-  //     console.log(`Error ${err}`);
-  //   })
-
-  //   // res.render(`general/index`, {
-  //   //   title: "Home",
-  //   //   userReg: req.body,
-  //   //   replyMsg: "Thank you for contacting us. We will respond to you as soon as possible.",
-  //   //   rooms: productModel.getAllRooms()
-  //   // });
-  // }
 });
 
 module.exports = router;
