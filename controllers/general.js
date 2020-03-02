@@ -149,83 +149,100 @@ router.get(`/contact-us`,(req,res)=>{
 
 //process 
 router.post(`/contact-us`,(req,res)=>{
-  const errors = [];
-  const {fullName,email,message} = req.body;
+  // const errors = [];
+  // const {fullName,email,message} = req.body;
   const sgMail = require('@sendgrid/mail');
 
-  //   sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
-  //   const msg = {
-  //   to: `n01398965@humbermail.ca`,
-  //   from: `${email}`,
-  //   subject: 'Contact Us Form Submit',
-  //   html: 
-  //   `Vistor's Full Name ${fullName} <br>
-  //    Vistor's Email Address ${email} <br>
-  //    Vistor's message : ${message}<br>
-  //   `,
-  //   };
+    sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
-  //   //Asynchornous operation (who don't know how long this will take to execute)
-  //   sgMail.send(msg)
-  //   .then(()=>{
-  //       res.redirect("/");
-  //   })
-  //   .catch(err=>{
-  //       console.log(`Error ${err}`);
-  //   });
-
-
-  if (req.body.fullName == "") {
-    errors.push("Full name is required");  
-  }
-  if (req.body.email == "") {
-    errors.push("Email is required");  
-  }
-  if (req.body.message == "") {
-    errors.push("Message is required");  
-  }
-  if (errors.length > 0) {
-    res.render(`general/contactus`, {
-      messages: errors
-    });
-  } else {
-    // console.log(req.body);
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: 'n01398965@humbermail.ca',
-      from: `${email}`,
-      subject: 'Contact Us Form Submit',
-      // text: 'and easy to do anywhere, even with Node.js',ß
-      html: 
-      `
-      <p>Visitor's Full Name : ${fullName}</p>
-      <p>Visitor's Email Address : ${email}</p>
-      <p>Visitor's Message : ${message}</p>
-      
-      `,
+      from: 'test@example.com',
+      subject: 'Sending with Twilio SendGrid is Fun',
+      text: 'and easy to do anywhere, even with Node.js',
+      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
-    
-    //Async operation, when you don't know how long it takes to execute
-    sgMail.send(msg)
-    .then(()=>{
-      res.redirect("/", {
-        // title: "Home",
-        // userReg: req.body,
-        replyMsg: "Thank you for contacting us. We will respond to you as soon as possible."
-        // rooms: productModel.getAllRooms()
-      });
-    })
-    .catch(err=>{
-      console.log(`Error ${err}`);
-    })
+    sgMail.send(msg);
+    // .then(()=>{
+    //       res.redirect("/");
+    //   })
+    //   .catch(err=>{
+    //       console.log(`Error ${err}`);
+    //   });
 
-    // res.render(`general/index`, {
-    //   title: "Home",
-    //   userReg: req.body,
-    //   replyMsg: "Thank you for contacting us. We will respond to you as soon as possible.",
-    //   rooms: productModel.getAllRooms()
+
+    // const msg = {
+    // to: `n01398965@humbermail.ca`,
+    // from: `${email}`,
+    // subject: 'Contact Us Form Submit',
+    // html: 
+    // `Vistor's Full Name ${fullName} <br>
+    //  Vistor's Email Address ${email} <br>
+    //  Vistor's message : ${message}<br>
+    // `,
+    // };
+
+    // //Asynchornous operation (who don't know how long this will take to execute)
+    // sgMail.send(msg)
+    // .then(()=>{
+    //     res.redirect("/");
+    // })
+    // .catch(err=>{
+    //     console.log(`Error ${err}`);
     // });
-  }
+
+
+  // if (req.body.fullName == "") {
+  //   errors.push("Full name is required");  
+  // }
+  // if (req.body.email == "") {
+  //   errors.push("Email is required");  
+  // }
+  // if (req.body.message == "") {
+  //   errors.push("Message is required");  
+  // }
+  // if (errors.length > 0) {
+  //   res.render(`general/contactus`, {
+  //     messages: errors
+  //   });
+  // } else {
+  //   // console.log(req.body);
+  //   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  //   const msg = {
+  //     to: 'n01398965@humbermail.ca',
+  //     from: `${email}`,
+  //     subject: 'Contact Us Form Submit',
+  //     // text: 'and easy to do anywhere, even with Node.js',ß
+  //     html: 
+  //     `
+  //     <p>Visitor's Full Name : ${fullName}</p>
+  //     <p>Visitor's Email Address : ${email}</p>
+  //     <p>Visitor's Message : ${message}</p>
+      
+  //     `,
+  //   };
+    
+  //   //Async operation, when you don't know how long it takes to execute
+  //   sgMail.send(msg)
+  //   .then(()=>{
+  //     res.redirect("/", {
+  //       // title: "Home",
+  //       // userReg: req.body,
+  //       replyMsg: "Thank you for contacting us. We will respond to you as soon as possible."
+  //       // rooms: productModel.getAllRooms()
+  //     });
+  //   })
+  //   .catch(err=>{
+  //     console.log(`Error ${err}`);
+  //   })
+
+  //   // res.render(`general/index`, {
+  //   //   title: "Home",
+  //   //   userReg: req.body,
+  //   //   replyMsg: "Thank you for contacting us. We will respond to you as soon as possible.",
+  //   //   rooms: productModel.getAllRooms()
+  //   // });
+  // }
 });
 
 module.exports = router;
