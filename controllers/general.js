@@ -47,17 +47,17 @@ router.post(`/signup`,(req, res) => {
   if (req.body.email == "") {
     errors.push("Email is required");  
   }
-  // if (req.body.phoneNumber == "") {
-  //   errors.push("Phone number is required"); 
-  // }
-  // if (req.body.firstName == "") {
-  //   errors.push("First name is required");
-  // }
-  // if (req.body.password == "") {
-  //   errors.push("Password is required");
-  // } else if (req.body.password.length < 8) {
-  //   errors.push("use at least 8 characters");
-  // } 
+  if (req.body.phoneNumber == "") {
+    errors.push("Phone number is required"); 
+  }
+  if (req.body.firstName == "") {
+    errors.push("First name is required");
+  }
+  if (req.body.password == "") {
+    errors.push("Password is required");
+  } else if (req.body.password.length < 8) {
+    errors.push("use at least 8 characters");
+  } 
   // else {
   //   userReg.push(`${req.body.email}`);
   //   userReg.push(`${req.body.phoneNumber}`);
@@ -151,6 +151,29 @@ router.get(`/contact-us`,(req,res)=>{
 router.post(`/contact-us`,(req,res)=>{
   const errors = [];
   const {fullName,email,message} = req.body;
+  const sgMail = require('@sendgrid/mail');
+
+  //   sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+  //   const msg = {
+  //   to: `n01398965@humbermail.ca`,
+  //   from: `${email}`,
+  //   subject: 'Contact Us Form Submit',
+  //   html: 
+  //   `Vistor's Full Name ${fullName} <br>
+  //    Vistor's Email Address ${email} <br>
+  //    Vistor's message : ${message}<br>
+  //   `,
+  //   };
+
+  //   //Asynchornous operation (who don't know how long this will take to execute)
+  //   sgMail.send(msg)
+  //   .then(()=>{
+  //       res.redirect("/");
+  //   })
+  //   .catch(err=>{
+  //       console.log(`Error ${err}`);
+  //   });
+
 
   if (req.body.fullName == "") {
     errors.push("Full name is required");  
@@ -167,23 +190,22 @@ router.post(`/contact-us`,(req,res)=>{
     });
   } else {
     // console.log(req.body);
-    const sgMail = require('@sendgrid/mail');
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
-      to: `n01398965@humbermail.ca`,
+      to: 'n01398965@humbermail.ca',
       from: `${email}`,
       subject: 'Contact Us Form Submit',
-      // text: 'and easy to do anywhere, even with Node.js',
+      // text: 'and easy to do anywhere, even with Node.js',ß
       html: 
       `
       <p>Visitor's Full Name : ${fullName}</p>
       <p>Visitor's Email Address : ${email}</p>
       <p>Visitor's Message : ${message}</p>
-      <strong>and easy to do anywhere, even with Node.js</strong>
+      
       `,
     };
     
-    //Async operation, when you don't know how long it takes
+    //Async operation, when you don't know how long it takes to execute
     sgMail.send(msg)
     .then(()=>{
       res.redirect("/", {
@@ -194,7 +216,7 @@ router.post(`/contact-us`,(req,res)=>{
       });
     })
     .catch(err=>{
-      console.log(`Err ${err}`);
+      console.log(`Error ${err}`);
     })
 
     // res.render(`general/index`, {
