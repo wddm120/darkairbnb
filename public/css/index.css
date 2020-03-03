@@ -199,10 +199,18 @@ padding: 0.5rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding: 0.25rem;
   width: 60%;
-  padding: 0.5rem;
 
 }
+
+/* .mobile-apps img{
+  width: 60%;
+}
+
+.social-media img{
+  width: 70%;
+} */
 
 
 /* Banner runs on startup */
@@ -297,6 +305,7 @@ padding: 0.5rem;
 
    .mobile-apps img, .social-media img{
     width:100%;
+    
    
   }
 

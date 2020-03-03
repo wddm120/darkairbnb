@@ -1,7 +1,8 @@
 
 const settings = {
   imagePath: `img/rooms/`,
-  starsPath: `img/stars/`
+  starsPath: `img/stars/`,
+  promoPath: `img/`
   // sliderPath: `img/sliders/`
 }
 
@@ -37,7 +38,8 @@ const room =
         starImg: settings.starsPath+`2stars.png`,
         title: `Hidden Gem of ...`,
         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
-        price: 66
+        price: 66,
+        promoImg: settings.promoPath+`special-offer-sign.png`
     });
     this.fakeDB.push({
         id : 111,
@@ -45,7 +47,8 @@ const room =
         starImg: settings.starsPath+`3stars.png`,
         title: `Joshua Tree ...`,
         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
-        price: 159
+        price: 159,
+        promoImg: settings.promoPath+`special-offer-sign.png`
         });
     this.fakeDB.push({
         id : 112,
@@ -53,7 +56,8 @@ const room =
         starImg: settings.starsPath+`4stars.png`,
         title: `1 Bdrm Modern ...`,
         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
-        price: 99 
+        price: 99,
+        promoImg: settings.promoPath+`special-offer-sign.png`
     });
     this.fakeDB.push({
         id : 113,
@@ -61,7 +65,8 @@ const room =
         starImg: settings.starsPath+`1star.png`,
         title: `Entire Chalet. South Lake ...`,
         description: `The Lake Tahoe Chalet`,
-        price: 249
+        price: 249,
+        promoImg: settings.promoPath+`special-offer-sign.png`
     });
     this.fakeDB.push({
         id : 114,
@@ -69,7 +74,8 @@ const room =
         starImg: settings.starsPath+`0star.png`,
         title: `Entire house ...`,
         description: `The Lake Tahoe Chalet`,
-        price: 149 
+        price: 149,
+        promoImg: settings.promoPath+`special-offer-sign.png`
     });
     this.fakeDB.push({
         id : 115,
@@ -77,7 +83,8 @@ const room =
         starImg: settings.starsPath+`5stars.png`,
         title: `Hector Cave House`,
         description: `Hector Cave House, carved into the unique caldera cliff for more than 250 years, was originally used as a wine cellar.`,
-        price: 572
+        price: 572,
+        promoImg: settings.promoPath+`special-offer-sign.png`
     });
   },
   getAllRooms()
