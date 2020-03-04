@@ -84,10 +84,10 @@ router.post(`/signup`,(req, res) => {
       <form>
       <p>Hi ${firstName},</p>
       <p>As an extra security measure, please verify this is the correct email address for your Dark Airbnb account, which is linked to the phone number ${phoneNumber}.</p>
-      <p><input type="submit" name="signup" value="Confirm email"></p>
+      <p>Click <a href="#">this link</a> to verify your email address</p>
       <p><button type="reset" name="reset" value="reset">This isn't my account</button></p>
       </form>
-      <p><img src="img/DarkAirbnbLogo.png"></p>
+      <p><img src="img/DarkAirbnbLogo.png" alt=""></a></p>
    
       `,
     };
