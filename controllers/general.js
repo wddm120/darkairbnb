@@ -72,28 +72,49 @@ router.post(`/signup`,(req, res) => {
     // console.log(accountSid);
     // console.log(authToken);
 
-    const msg = {
-      to: 'n01398965@humbermail.ca',
-      from: `${email}`,
-      subject: 'Contact Us Form Submit',
+    const clientMsg = {
+      to: `${email}`,
+      from: `n01398965@humbermail.ca`,
+      subject: 'Confirm your email',
       // text: 'and easy to do anywhere, even with Node.js',ß
       html:
         `
-      <p>User :</p>
-      <p>First Name : ${firstName}</p>
-      <p>Last Name : ${lastName}</p>
-      <p>Email Address : ${email}</p>
-      <p>Phone Number : ${phoneNumber}</p>
+      <h2>Thank You!</h2>
+      <p>Your submission has been received</p>
+      <form>
+      <p>Hi ${firstName},</p>
+      <p>As an extra security measure, please verify this is the correct email address for your Dark Airbnb account, which is linked to the phone number ${phoneNumber}.</p>
+      <p><input type="submit" name="signup" value="Confirm email"></p>
+      <p><button type="reset" name="reset" value="reset">This isn't my account</button></p>
+      </form>
+      <p><img src="img/DarkAirbnbLogo.png"></p>
+   
       `,
     };
 
+    // const adminMsg = {
+    //   to: `n01398965@humbermail.ca`,
+    //   from: `${email}`,
+    //   subject: 'Contact Us Form Submit',
+    //   // text: 'and easy to do anywhere, even with Node.js',ß
+    //   html:
+    //     `
+    //   <p>User :</p>
+    //   <p>First Name : ${firstName}</p>
+    //   <p>Last Name : ${lastName}</p>
+    //   <p>Email Address : ${email}</p>
+    //   <p>Phone Number : ${phoneNumber}</p>
+    //   `,
+    // };
+
     // SENDGRID
-    sgMail.send(msg)
+    sgMail.send(clientMsg)
       //Asynchornous operation (who don't know how long this will take to execute)
       // .then(() => {
       //   res.redirect("/");
       // })
       .then(() => {
+        
         res.render("general/index", {
           replyMsg: "We sent an email to " +`${email}`+ " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
           rooms: productModel.getAllRooms()
@@ -103,7 +124,7 @@ router.post(`/signup`,(req, res) => {
         console.log(`Error ${err}`);
       });
 
-      // TWILIO
+      TWILIO
       client.messages
         .create({
           body: `Hi ${firstName} ${lastName}, Thank you for joining Dark Airbnb. Please check your email and verify your account`,
@@ -188,7 +209,7 @@ router.post(`/contact-us`,(req,res)=>{
     // console.log(req.body);
     // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
-      to: 'n01398965@humbermail.ca',
+      to: `n01398965@humbermail.ca`,
       from: `${email}`,
       subject: 'Contact Us Form Submit',
       // text: 'and easy to do anywhere, even with Node.js',ß
