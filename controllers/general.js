@@ -124,7 +124,8 @@ router.post(`/signup`,(req, res) => {
         console.log(`Error ${err}`);
       });
 
-      TWILIO
+    
+      // TWILIO
       client.messages
         .create({
           body: `Hi ${firstName} ${lastName}, Thank you for joining Dark Airbnb. Please check your email and verify your account`,
