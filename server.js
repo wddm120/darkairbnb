@@ -3,6 +3,8 @@ const exphbs  = require('express-handlebars');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
+const mongoose = require("mongoose");
+
 
 //load the environment variable file
 require('dotenv').config({path:"./config/keys.env"});
@@ -38,6 +40,13 @@ app.use("/rooms",roomController);
 //     sliderImg: settings.sliderPath+`slider01.jpg`
 //   }
 // ];
+
+mongoose.connect(process.env.MONGO_DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>{
+    console.log(`Connected to MongoDB Database`);
+})
+
+.catch(err=>console.log(`Error occured when connecting to database ${err}`));
 
 
 //Setup server
