@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const path = require('path');
+const session = require('express-session');
 
 
 //load the environment variable file
@@ -20,21 +21,66 @@ app.use("/public", express.static(path.join(__dirname,"public")));
 
 //This tells Express to set or register Handlebars as its' Template/View Engine
 app.engine('hbs', exphbs({
+  extname: 'hbs'
 //   layoutsDir:`${__dirname}/views/layouts`,
 //   partialsDir:`${__dirname}/views/partials`,
   // defaultLayout:'main',
-  extname: 'hbs'
+
+      // helpers:
+      //   {
+      //       if_eq:function() 
+      //       {
+
+      //       }
+      //   }
+ 
 }));
 
 //set the view engine to use handlebars
 // app.set('views',__dirname + '/views');
 app.set('view engine', 'hbs');
 
+
+
 //load controllers
 const generalController = require("./controllers/general");
 const roomController = require("./controllers/room");
 const userController = require("./controllers/user");
 const adminController = require("./controllers/admin");
+
+/*
+This is to allow specific forms and / or links that were submitted/pressed to send PUT and DELETE request respectively
+*/
+app.use((req,res,next)=>{
+  if(req.query.method=="PUT")
+  {
+      req.method="PUT"
+  }
+  else if(req.query.method=="DELETE"){
+      req.method="DELETE"
+  }
+
+  next();
+})
+
+app.use(session({
+    secret: `${process.env.SECRET_KEY}`,
+    resave: false,
+    saveUninitialized: true,
+
+    //working only for HTTPS
+    // cookie: { secure: true }
+}))
+
+
+//session is assigned to global variable so can be accessed any handlebars file
+app.use((req,res,next)=>{
+
+  res.locals.user=req.session.userInfo;
+  next();
+
+})
+
 
 
 //map each controller to the app object

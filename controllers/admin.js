@@ -45,4 +45,12 @@ router.get(`/room/edit`,(req,res)=>{
 })
 
 
+router.get("/logout/",(req,res)=>{
+
+  req.session.destroy();
+  res.redirect("/admin")
+
+  // res.render("User/userDashboard");
+})
+
 module.exports = router;

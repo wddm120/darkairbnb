@@ -9,7 +9,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 const userSchema = new Schema({
   profilePic:
   {
-    type:String
+    type:String,
+    default:undefined
   },
   firstName:
   {
@@ -23,11 +24,12 @@ const userSchema = new Schema({
   gender:
   {
     type:String,
-    default:"Male"
+    default:undefined
   },
   dateOfBirth:
   {
-    type:Date
+    type:Date,
+    default:undefined
   },
   email:
   {
@@ -42,16 +44,18 @@ const userSchema = new Schema({
   },
   governmentId:
   {
-    type:String
+    type:String,
+    default:undefined
   },
   address:
   {
-    type:String
+    type:String,
+    default:undefined
   },
   password:
   {
-    type:String,
-    required:true
+    type:String
+    //required:true
   },
   dateCreated:
   {
