@@ -1,8 +1,8 @@
 
 const settings = {
-  imagePath: `img/rooms/`,
-  starsPath: `img/stars/`,
-  promoPath: `img/`
+  imagePath: `/public/img/rooms/`,
+  starsPath: `/public/img/stars/`,
+  promoPath: `/public/img/`
   // sliderPath: `img/sliders/`
 }
 

@@ -2,7 +2,7 @@
   {{#each messages}}
   <div class="errors">{{this}}</div>
   {{/each}}
-  <form method="POST" action="/signup">
+  <form method="POST" action="/user/signup">
     <p><input type="text" name="email" value="" placeholder="Email address">*</p>
     <p><input type="text" name="phoneNumber" value="" placeholder="Phone number">*</p>
     <p><input type="text" name="firstName" value="" placeholder="First name">*</p>
@@ -28,5 +28,5 @@
   <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
 </div> --}}
 <div class="login-help">
-  <p>Already have an Dark Airbnb account <a href="/login">Log in</a></p>
+  <p>Already have an Dark Airbnb account <a href="/user/login">Log in</a></p>
 </div>

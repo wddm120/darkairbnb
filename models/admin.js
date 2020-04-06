@@ -6,11 +6,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 
 //this indicates the shapes of the documents that will be entering the database
-const userSchema = new Schema({
-  profilePic:
-  {
-    type:String
-  },
+const adminSchema = new Schema({
+
   firstName:
   {
     type:String,
@@ -20,33 +17,11 @@ const userSchema = new Schema({
   {
     type:String
   },
-  gender:
-  {
-    type:String,
-    default:"Male"
-  },
-  dateOfBirth:
-  {
-    type:Date
-  },
   email:
   {
     type:String,
     unique:true,
     required:true
-  },
-  phoneNumber:
-  {
-    type:String,
-    required:true
-  },
-  governmentId:
-  {
-    type:String
-  },
-  address:
-  {
-    type:String
   },
   password:
   {
@@ -61,10 +36,10 @@ const userSchema = new Schema({
 
 });
 
-userSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' });
+adminSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' });
 
 
-userSchema.pre("save",function(next){
+adminSchema.pre("save",function(next){
   //salt random generated characters or strings
   bcrypt.genSalt(12)
   .then((salt)=>{
@@ -85,6 +60,6 @@ userSchema.pre("save",function(next){
 
 
 // for every schema you create (create a schema per collection) you must also create a model object. The model will allow you to perform CRUD operations on a given collection! 
-const userModel = mongoose.model('User', userSchema);
+const adminModel = mongoose.model('Admin', adminSchema);
 
-module.exports = userModel;
+module.exports = adminModel;

@@ -13,14 +13,25 @@ router.get(`/`,(req,res)=>{
   });
 });
 
-//show add room form
+//Add room route
 router.get(`/add`,(req,res)=>{
-res.render();
-});
 
-// when user submits form
-router.post(`/add`,(req,res)=>{
-res.render();
-});
+  res.render(`rooms/addRoom`,{
+    title:"Add Room",
+    headingInfo:"ADD ROOM"
+  });
+})
+
+
+
+// //show add room form
+// router.get(`/add`,(req,res)=>{
+// res.render();
+// });
+
+// // when user submits form
+// router.post(`/add`,(req,res)=>{
+// res.render();
+// });
 
 module.exports = router;
