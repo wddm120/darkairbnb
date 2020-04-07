@@ -9,8 +9,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const userSchema = new Schema({
   profilePic:
   {
-    type:String,
-    default:undefined
+    type:String
   },
   firstName:
   {

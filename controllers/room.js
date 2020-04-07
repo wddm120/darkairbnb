@@ -23,6 +23,16 @@ router.get(`/add`,(req,res)=>{
 })
 
 
+//Edit room route
+router.get(`/edit`,(req,res)=>{
+
+  res.render(`rooms/editRoom`,{
+    title:"Edit Room",
+    headingInfo:"EDIT ROOM"
+  });
+})
+
+
 
 // //show add room form
 // router.get(`/add`,(req,res)=>{

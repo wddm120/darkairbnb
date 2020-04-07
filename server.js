@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const path = require('path');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 
 
 //load the environment variable file
@@ -62,6 +63,8 @@ app.use((req,res,next)=>{
 
   next();
 })
+
+app.use(fileUpload());
 
 app.use(session({
     secret: `${process.env.SECRET_KEY}`,

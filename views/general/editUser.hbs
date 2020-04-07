@@ -1,26 +1,39 @@
-<div>
-  <h1>{{headingInfo}}</h1>
-  <li><a href="/user/logout">Logout </a></li>
-  <form method="POST" action="/user/update/{{user._id}}?method=PUT">
-  <ul>
-    <li><img src="/public/img/users/{{user.profilePic}}"> </li>
-    <li><label>File Upload</label><input type="file" name="profilePic" id="profilePic"></li>
-    <li><label>First name</label>  <input type="text" name="firstName" id="firstName" value="{{user.firstName}}"></li>
-    <li><label>Last name</label>  <input type="text" name="lastName" id="lastName" value="{{user.lastName}}"></li>
-    <li><label>Gender</label> 
-        <select name="gender">
+<div class="main-info">
+  <div class="sub-header">
+    <h1>{{headingInfo}}</h1>
+  </div>
+  <div class="sub-nav">
+    <ul>
+      <li><a href="/user/logout">Logout </a></li>
+    </ul>
+  </div>
+  <div class="info">
+    <form method="POST" action="/user/update/{{user._id}}?method=PUT" enctype="multipart/form-data">
+      <ul>
+        <li><img src="/public/img/users/{{user.profilePic}}"> </li>
+        <li><label>File Upload</label><input type="file" name="profilePic" id="profilePic"></li>
+        <li><label>First name</label> <input type="text" name="firstName" id="firstName" value="{{user.firstName}}">*</li>
+        <li><label>Last name</label> <input type="text" name="lastName" id="lastName" value="{{user.lastName}}"></li>
+        <li><label>Gender</label>
+          <select name="gender">
             {{!-- <option value="male" {{#if_eq}} selected {{/if}}>Male</option>
             <option value="female" {{#if_eq}} selected {{/if}}>Female</option> --}}
-            <option value="male" >Male</option>
+            <option value="male">Male</option>
             <option value="female">Female</option>
-        </select>{{user.gender}}
-    </li>
-    <li><label>Date of birth</label> <input type="date" name="dateOfBirth" id="dateOfBirth" value="{{user.dateOfBirth}}">{{user.dateOfBirth}} </li>
-    <li><label>Email address</label> <input type="text" name="email" id="email" value="{{user.email}}"></li>
-    <li><label>Phone number</label> <input type="text" name="phoneNumber" id="phoneNumber" value="{{user.phoneNumber}}"></li>
-    <li><label>Government ID</label> <input type="text" name="governmentId" id="governmentId" value="{{user.governmentId}}"></li>
-    <li><label>Address</label ><input type="text" name="address" id="address" value="{{user.address}}"></li>
-  </ul>
-   <input type="submit" value="Save">
-   </form>
+          </select>{{user.gender}}
+        </li>
+        <li><label>Date of birth</label> <input type="date" name="dateOfBirth" id="dateOfBirth" value="{{user.dateOfBirth}}">{{user.dateOfBirth}} </li>
+        <li><label>Email address</label> <input type="text" name="email" id="email" value="{{user.email}}">*</li>
+        <li><label>Phone number</label> <input type="text" name="phoneNumber" id="phoneNumber" value="{{user.phoneNumber}}">*</li>
+        <li><label>Government ID</label> <input type="text" name="governmentId" id="governmentId" value="{{user.governmentId}}"></li>
+        <li><label>Address</label> <input type="text" name="address" id="address" value="{{user.address}}"></li>
+        {{!-- <li><label>New Password </label> <input type="password" name="password" value="{{user.password}}"></li>
+        <li><label>or Leave Existing Password</label></li> --}}
+        
+      </ul>
+        <div class="sub-footer">
+      <p><input type="submit" value="Save"></p>
+      </div>
+    </form>
+  </div>
 </div>

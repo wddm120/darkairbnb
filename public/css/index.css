@@ -26,40 +26,6 @@ body{
  
 }
 
-/* img{
-  width: 100%;
-} */
-
-/* h1{
-  padding: 0.5rem;
-  text-align: left;
-}
-
-h2{
-  margin-left: 1rem;
-  padding: 0.5rem;
-  text-align: left;
-}
-
-h3{
-  margin: 0;
-  font-weight: bold;
-  color: var(--dark);
-  text-align: left;
-} */
-
-
-/* fieldset {
-  display: block;
-  border: solid 1px var(--light);
-  padding-block-start: 0.35em;
-  padding-inline-end: 0.75em;
-  padding-block-end: 0.625em;
-  padding-inline-start: 0.75em;
-  min-inline-size: min-content;
-
-} */
-
 
 .wrapper{
   display: grid;
@@ -78,7 +44,6 @@ h3{
   border: solid 1px;
 
   padding: 0.5rem 1rem;
-/* background-image:url(/public/img/sliders/slider01.jpg); */
 
  
 }
@@ -124,16 +89,6 @@ padding: 0.5rem;
 }
 
 
-/* .verified-user {
-  margin: 0.25rem auto;
-  padding: 0.5rem;
-  width: 100%;
-  border-radius: 3px;
-   border: solid 1px var(--light);
-  -webkit-box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
-  
-} */
 .verified-user, .contactus-response{
   text-align: left;
   margin-left: auto;
@@ -168,11 +123,6 @@ padding: 0.5rem;
 
 }
 
-/* .mobile-apps a{
-  color: var(--dark);
-
-} */
-
 .cs{
   text-align: left;
 
@@ -204,80 +154,6 @@ padding: 0.5rem;
 
 }
 
-/* .mobile-apps img{
-  width: 60%;
-}
-
-.social-media img{
-  width: 70%;
-} */
-
-
-/* Banner runs on startup */
-/* #mask {
-  position:absolute;
-  left:0;
-  top:0;
-  z-index:9000;
-  background-color:#26262c;
-  display:none;
-}  
-#boxes .window {
-  position:absolute;
-  left:0;
-  top:0;
-  width:440px;
-  height:850px;
-  display:none;
-  z-index:9999;
-  padding:20px;
-  border-radius: 5px;
-  text-align: center;
-}
-#boxes #dialog {
-  width:450px; 
-  height:auto;
-  padding: 10px 10px 10px 10px;
-  background-color:#ffffff;
-  font-size: 15pt;
-}
-
-.agree:hover{
-  background-color: #D1D1D1;
-}
-.popupoption:hover{
-	background-color:#D1D1D1;
-	color: green;
-}
-.popupoption2:hover{
-	color: red;
-}
-
-.window{
-  top: 50%; 
-  left: 50%; 
-  display: none;
-}
-
-.close-icon{
-  width: 25px ;
-  float:right; 
-  margin-right: -25px; 
-  margin-top: -20px;
-}
-
-.banner{
-  width:450rem;
-}
-
-.mask{
-  width: 2478px; 
-  font-size: 32pt; 
-  color:white; 
-  height: 1202px; 
-  display: none; 
-  opacity: 0.4;
-} */
 
 /* MEDIA QUERIES */
 @media(min-width: 600px){

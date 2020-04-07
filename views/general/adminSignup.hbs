@@ -1,0 +1,18 @@
+<div class="sign-up">
+  {{#each messages}}
+  <div class="errors">{{this}}</div>
+  {{/each}}
+  <form method="POST" action="/admin/signup">
+    <p><input type="text" name="email" value="" placeholder="Email address">*</p>
+    <p><input type="text" name="phoneNumber" value="" placeholder="Phone number">*</p>
+    <p><input type="text" name="firstName" value="" placeholder="First name">*</p>
+    <p><input type="text" name="lastName" value="" placeholder="Last name">&nbsp</p>
+    <p><input type="password" name="password" value="" placeholder="Create a password">*</p>
+   
+    <p class="submit"><input type="submit" name="signup" value="Sign up"></p>
+  </form>
+</div>
+
+<div class="login-help">
+  <p>Already have an Dark Airbnb account <a href="/admin">Log in</a></p>
+</div>

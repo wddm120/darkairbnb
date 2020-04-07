@@ -4,6 +4,8 @@ const router = express.Router();
 const productModel = require("../models/rooms");
 const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
+const moment = require('moment');
+const path = require("path");
 
 // User Signup route
 router.get(`/signup`,(req,res)=>{
@@ -218,7 +220,7 @@ router.post(`/login`,(req,res)=>{
 
 //User Personal Info route
 router.get(`/profile`,(req,res)=>{
-
+  
   // userModel.findById(req.params.id)
   // .then((user)=>{
       
@@ -290,7 +292,6 @@ res.render(`general/editUser`,{
 router.put("/update/:id",(req,res)=>{
   const messages=[];
   const user = {
-    
     firstName : req.body.firstName,
     lastName : req.body.lastName,
     gender : req.body.gender,
@@ -302,59 +303,34 @@ router.put("/update/:id",(req,res)=>{
 
   }
 
+//  //instance
+//  const user1 = new userModel(user);
+ 
+//     req.files.profilePic.name = `pro_pic${user1._id}${path.parse(req.files.profilePic.name).ext}`
+//     req.files.profilePic.mv(`public/img/users/${req.files.profilePic.name}`)
+//     .then(()=>{
+//       userModel.updateOne({_id:user._id},user)
+        
+   
+//       .then(()=>{
+//         req.session.userInfo = user;
+//         res.redirect(`/user/profile`)
+
+//     })
+  
   userModel.updateOne({_id:req.params.id},user )
   .then(()=>{
 
      req.session.userInfo = user;
      res.redirect(`/user/profile`)
-    //  res.render('general/userDashboard',{
-    //   title:"Personal Info",
-    //   headingInfo:"USER PERSONAL INFO",
-    //   messages:"Saved"
-    // });
 
-    // messages.push("The username or password you entered is incorrect");
-    //                 res.render("general/login",{
-    //                     // data:messages
-    //                     messages
-    //                 })
+
+ 
   })
 
-  .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
+   .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
 
 
-  //  //instance
-  // const user = new userModel(newUser);
-      
-  // user.save()
- 
-  // .then(()=>{
-  //    // res.redirect("/")
-  //   res.redirect("/user/profile", {
-  //     replyMsg: "Saved"
- 
-  //   });
-  // })
-  // .catch(err=>console.log(`Error happened when inserting in the database : ${err}`));
-
-  // const task = 
-  // {
-  //     title:req.body.title,
-  //     description:req.body.description,
-  //     dueDate:req.body.dueDate,
-  //     status:req.body.status,
-  //     priority:req.body.priority
-  // }
-
-  // taskModel.updateOne({_id:req.params.id},task )
-  // .then(()=>{
-  //     res.redirect("/task/list");
-
-  // })
-
-  // .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
-
-  
 
 });
 

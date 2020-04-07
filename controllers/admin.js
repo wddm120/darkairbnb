@@ -2,7 +2,9 @@ const express = require ('express')
 const router = express.Router();
 //load rooms
 const productModel = require("../models/rooms");
-const userModel = require("../models/user")
+const adminModel = require("../models/admin")
+
+
 
 
 //Admin login route
@@ -14,6 +16,50 @@ router.get(`/`,(req,res)=>{
   });
 })
 
+
+router.post(`/login`,(req, res) => {
+  // console.log(req.body);
+  const errors = [];
+  const {email,phoneNumber,firstName,lastName} = req.body;
+
+  //object
+  const newAdmin = {
+    email : req.body.email,
+    phoneNumber : req.body.phoneNumber,
+    firstName : req.body.firstName,
+    lastName : req.body.lastName,
+    password: req.body.password
+
+  }
+  res.redirect("/admin/dashboard")
+});
+
+//Admin signup route
+router.get(`/signup`,(req,res)=>{
+  res.render(`general/adminSignup`,{
+    title: "SignUp",
+    headingInfo : "ADMIN SignUp"
+
+  });
+})
+
+
+router.post(`/signup`,(req, res) => {
+  // console.log(req.body);
+  const errors = [];
+  const {email,phoneNumber,firstName,lastName} = req.body;
+
+  //object
+  const newAdmin = {
+    email : req.body.email,
+    phoneNumber : req.body.phoneNumber,
+    firstName : req.body.firstName,
+    lastName : req.body.lastName,
+    password: req.body.password
+
+  }
+  res.redirect("/admin/dashboard")
+});
 
 //Admin Personal Info route
 router.get(`/dashboard`,(req,res)=>{

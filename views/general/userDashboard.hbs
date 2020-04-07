@@ -1,23 +1,33 @@
 {{#each messages}}
-  <div class="errors">{{this}}</div>
+  <div class="errors">
+    {{this}}
+  </div>
 {{/each}}
 
-<div>
-  <h1>{{headingInfo}}</h1>
-  <ul>
-    <li><a href="/user/edit">Edit </a></li>
-    <li><a href="/user/logout">Logout </a></li>
-  </ul>
-
-  <ul>
-    <li><img src="/img/users/{{user.profilePic}}"> </li>
-    <li><label>Legal name</label>  {{user.firstName}}</li>
-    <li><label>Gender</label> {{user.gender}}</li>
-    <li><label>Date of birth</label> {{user.dateOfBirth}}</li>
-    <li><label>Email address</label> {{user.email}}</li>
-    <li><label>Phone number</label> {{user.phoneNumber}}</li>
-    <li><label>Government ID</label> {{user.governmentId}}</li>
-    <li><label>Address</label> {{user.address}}</li>
-  </ul>
-
+<div class="main-info">
+  <div class="sub-header">
+   <h1>{{headingInfo}}</h1>
+  </div>
+  <nav class="sub-nav">
+    <ul>
+      <li><a href="/user/logout">Logout </a></li>
+    </ul>
+  </nav>
+  <div class="info">
+    <ul>
+      <li><img src="/img/users/{{user.profilePic}}"> </li>
+      <li><label>Legal name :</label> {{user.firstName}} {{user.lastName}}</li>
+      <li><label>Gender :</label> {{user.gender}}</li>
+      <li><label>Date of birth :</label> {{user.dateOfBirth}}</li>
+      <li><label>Email address :</label> {{user.email}}</li>
+      <li><label>Phone number :</label> {{user.phoneNumber}}</li>
+      <li><label>Government ID :</label> {{user.governmentId}}</li>
+      <li><label>Address :</label> {{user.address}}</li>
+    </ul>
+  </div>
+  <div class="sub-footer">
+    <ul>
+      <li><a href="/user/edit">Edit </a></li>
+    </ul>
+  </div>
 </div>
