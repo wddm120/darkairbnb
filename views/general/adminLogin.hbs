@@ -1,6 +1,6 @@
 <div class="login">
   {{#each messages}}
-  <div class="errors">{{this}}</div>
+  <div class="errors">{{>contactus-response}}</div>
   {{/each}}
   <h1>{{headingInfo}}</h1>
   <form method="POST" action="/admin/login">

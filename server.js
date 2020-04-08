@@ -84,11 +84,28 @@ app.use((req,res,next)=>{
 
 })
 
+//session is assigned to global variable so can be accessed any handlebars file
+app.use((req,res,next)=>{
+
+  res.locals.admin=req.session.adminInfo;
+  next();
+
+})
+
+//session is assigned to global variable so can be accessed any handlebars file
+app.use((req,res,next)=>{
+
+  res.locals.room=req.session.roomInfo;
+  next();
+
+})
+
 
 
 //map each controller to the app object
 app.use("/",generalController);
-app.use("/rooms",roomController);
+// app.use("/roomFake",roomController);
+app.use("/room",roomController);
 app.use("/user",userController);
 app.use("/admin",adminController);
 

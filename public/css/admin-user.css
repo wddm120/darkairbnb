@@ -78,6 +78,12 @@ min-width: 30%;
   
   }
 
+.info textarea{
+  width: 20rem;
+  height: 10rem;
+
+}
+
 .info input[type=date], .info select, .info input[type=file]{
   width: fit-content;
 }

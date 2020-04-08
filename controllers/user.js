@@ -1,7 +1,8 @@
 const express = require ('express')
 const router = express.Router();
 //load rooms
-const productModel = require("../models/rooms");
+// const productModel = require("../models/roomFake");
+const roomModel = require("../models/room");
 const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const moment = require('moment');
@@ -80,7 +81,7 @@ router.post(`/signup`,(req, res) => {
       // res.redirect("/")
       res.render("general/index", {
         replyMsg: "We sent an email to " +`${email}`+ " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
-        rooms: productModel.getAllRooms()
+        // rooms: productModel.getAllRooms()
       });
     })
     .catch(err=>console.log(`Error happened when inserting in the database : ${err}`));
@@ -252,41 +253,36 @@ router.get(`/profile`,(req,res)=>{
 
 
 //User Edit route
-router.get(`/edit`,(req,res)=>{
+router.get(`/edit`, (req, res) => {
 
-//  userModel.findById(req.params.id)
-//   .then((user)=>{
-      
-//       const {_id, firstName, lastName, gender, dateOfBirth, email, phoneNumber, governmentId, address} = user;
-      
-//       res.render('general/userDashboard',{
-//           _id,
-//           firstName,
-//           lastName,
-//           gender,
-//           dateOfBirth,
-//           email,
-//           phoneNumber,
-//           governmentId,
-//           address
-//       });
-//       // console.log(moment(dueDate).format('YYYY-MM-DD'))
+  //  userModel.findById(req.params.id)
+  //   .then((user)=>{
 
-//   })
+  //       const {_id, firstName, lastName, gender, dateOfBirth, email, phoneNumber, governmentId, address} = user;
 
-//   .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
-//object
+  //       res.render('general/userDashboard',{
+  //           _id,
+  //           firstName,
+  //           lastName,
+  //           gender,
+  //           dateOfBirth,
+  //           email,
+  //           phoneNumber,
+  //           governmentId,
+  //           address
+  //       });
+  //       // console.log(moment(dueDate).format('YYYY-MM-DD'))
 
-res.render(`general/editUser`,{
-  title:"Edit",
-  headingInfo:"USER EDIT"
-});
+  //   })
 
-  
+  //   .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
+  //object
 
- 
+  res.render(`general/editUser`, {
+    title: "Edit",
+    headingInfo: "USER EDIT"
+  });
 
-  
 })
 
 router.put("/update/:id",(req,res)=>{

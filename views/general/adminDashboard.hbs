@@ -4,15 +4,20 @@
   </div>
   <nav class="sub-nav">
     <ul>
-      <li><a href="/rooms/add">Add Room</a></li>
-      <li><a href="/rooms/edit">Edit Room</a></li>
+      <li><a href="/room/add">Add Room</a></li>
+      <li><a href="/room/edit">Edit Room</a></li>
       <li><a href="/admin/logout">Logout </a></li>
     </ul>
   </nav>
   <div class="info">
     <ul>
-      <li><label>Full name</label> </li>
-      <li><label>Email address</label> </li>
+      <li><label>Full name</label> {{admin.firstName}} {{admin.lastName}}</li>
+      <li><label>Email address</label> {{admin.email}}</li>
+    </ul>
+  </div>
+  <div class="sub-footer">
+    <ul>
+      <li><a href="/admin/edit">Edit </a></li>
     </ul>
   </div>
 </div>

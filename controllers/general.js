@@ -1,9 +1,10 @@
 const express = require ('express')
 const router = express.Router();
 //load rooms
-const productModel = require("../models/rooms");
+// const productModel = require("../models/roomFake");
 // const {email,phoneNumber,firstName,lastName,message} = req.body;
 const userModel = require("../models/user")
+const roomModel = require("../models/room");
 
 
 // Home route
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
   res.render('general/index', {
     title: "Home",
     // indexRooms : promoRooms
-    rooms: productModel.getAllRooms()
+    // rooms: productModel.getAllRooms()
     // carousel : sliders
   });
 });
@@ -71,7 +72,7 @@ router.post(`/contact-us`,(req,res)=>{
       .then(() => {
         res.render("general/index", {
           replyMsg: "Thank you for contacting us. We will respond to you as soon as possible.",
-          rooms: productModel.getAllRooms()
+          // rooms: productModel.getAllRooms()
         });
       })
       .catch(err => {

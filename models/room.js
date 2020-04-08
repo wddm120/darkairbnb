@@ -26,6 +26,18 @@ const roomSchema = new Schema({
   {
     type:String
   },
+  city:
+  {
+    type:String
+  },
+  province:
+  {
+    type:String
+  },
+  country:
+  {
+    type:String
+  },
   status:
   {
     type:String,
@@ -35,7 +47,8 @@ const roomSchema = new Schema({
   {
     type:Date,
     default:Date.now()
-  }
+  },
+  
 
 });
 
@@ -44,6 +57,6 @@ const roomSchema = new Schema({
 
 
 // for every schema you create (create a schema per collection) you must also create a model object. The model will allow you to perform CRUD operations on a given collection! 
-const roomModel = mongoose.model('User', roomSchema);
+const roomModel = mongoose.model('Room', roomSchema);
 
 module.exports = roomModel;

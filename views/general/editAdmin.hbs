@@ -1,0 +1,25 @@
+<div class="main-info">
+  <div class="sub-header">
+    <h1>{{headingInfo}}</h1>
+  </div>
+  <nav class="sub-nav">
+    <ul>
+      <li><a href="/rooms/add">Add Room</a></li>
+      <li><a href="/rooms/edit">Edit Room</a></li>
+      <li><a href="/admin/logout">Logout </a></li>
+    </ul>
+  </nav>
+  <div class="info">
+    <form method="POST" action="/admin/update/{{admin._id}}?method=PUT">
+      <ul>
+        <li><label>First name</label> <input type="text" name="firstName" id="firstName" value="{{admin.firstName}}">*
+        </li>
+        <li><label>First name</label> <input type="text" name="lastName" id="lastName" value="{{admin.lastName}}"></li>
+        <li><label>Email address</label> <input type="text" name="email" id="email" value="{{admin.email}}">*</li>
+      </ul>
+      <div class="sub-footer">
+        <p><input type="submit" value="Save"></p>
+      </div>
+    </form>
+  </div>
+</div>
