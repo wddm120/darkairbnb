@@ -1,0 +1,31 @@
+<div class="main-info">
+
+  <div class="sub-header">
+    <h1>{{headingInfo}}</h1>
+  </div>
+  <nav class="sub-nav">
+    <ul>
+      <li><a href="/admin/room/add">Add Room</a></li>
+      <li><a href="/admin/logout">Logout </a></li>
+    </ul>
+  </nav>
+  {{#each data }}
+  <div class="room-std">
+    <ul class="room-info-std">
+      <li><img src="/public/img/rooms/{{this.roomPic}}"></li>
+      <li class="top-room-info-std">
+        <h3>{{this.title}}</h3><img src={{this.starImg}} class="star-img-std">
+      </li>
+      <li><label>{{this.description}}</label></li>
+      <li><label>${{this.price}} CAD / night</label></li>
+    </ul>
+    <div class="sub-footer-std">
+      <ul>
+        <li><a href="/admin/room/edit/{{this.id}}">Edit</a></li>
+        <li><a href="/admin/room/delete/{{this.id}}?method=DELETE" >Delete</a></li>
+      </ul>
+    </div>
+    
+  </div>
+  {{/each}}
+</div>

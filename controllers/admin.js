@@ -8,8 +8,6 @@ const moment = require('moment');
 const path = require("path");
 
 
-
-
 //Admin login route
 router.get(`/`,(req,res)=>{
   res.render(`general/adminLogin`,{
@@ -203,28 +201,226 @@ router.get(`/dashboard`,(req,res)=>{
 })
 
 
-//room route
+//Add room route
 router.get(`/room/add`,(req,res)=>{
-
+  // res.redirect("/room/add")
   res.render(`rooms/addRoom`,{
     title:"Add Room",
     headingInfo:"ADD ROOM"
   });
 })
 
+router.post(`/room/add`,(req, res) => {
+  // console.log(req.body);
+  const errors = [];
+  const {title,description,price,address,city,province,country,status} = req.body;
+
+  //object
+  const newRoom = {
+    title : req.body.title,
+    description : req.body.description,
+    price : req.body.price,
+    address : req.body.address,
+    city : req.body.city,
+    province : req.body.province,
+    country : req.body.country,
+    status: req.body.status
+
+  }
+
+  /*Rules for inserting into a MongoDB database using mongoose is to do the following :
+  1. you have to create an instance of the module, you must pass data that you want insertedin the form of an object(object literal)
+  2. From the instance, you call the save method
+
+  */
+
+
+  if (req.body.title == "") {
+    errors.push("Title is required");  
+  }
+  // if (req.body.description == "") {
+  //   errors.push("Description is required"); 
+  // }
+  // if (req.body.price == "") {
+  //   errors.push("Price is required");
+  // }
+  // if (req.body.address == "") {
+  //   errors.push("Address is required");
+  // } 
+  // if (req.body.city == "") {
+  //   errors.push("City is required");
+  // }
+  // if (req.body.province == "") {
+  //   errors.push("Province is required");
+  // }
+  // if (req.body.country == "") {
+  //   errors.push("Country is required");
+  // }
+
+
+  if (errors.length > 0) {
+    res.render(`rooms/addRoom`, {
+      messages: errors
+    });
+  } else {
+    // console.log(req.body);
+    // console.log(accountSid);
+    // console.log(authToken);
+
+    //instance
+    const room = new roomModel(newRoom);
+    
+    room.save()
+
+    .then((room)=>{
+      req.files.roomPic.name = `roomPic-${room._id}${path.parse(req.files.roomPic.name).ext}`
+      req.files.roomPic.mv(`public/img/rooms/${req.files.roomPic.name}`)
+      .then(()=>{
+          roomModel.updateOne({_id:room._id},{
+            roomPic: req.files.roomPic.name
+          })
+          .then(()=>{
+              // res.redirect(`/user/profile/${room._id}`)
+              res.redirect(`/admin/room/list`)
+          })
+      })
+
+  })
+    
+    // .then(()=>{
+    //   // res.redirect("/")
+    //   res.render("rooms/addRoom", {
+    //     replyMsg: "Room added"
+    //     // rooms: productModel.getAllRooms()
+    //   });
+    // })
+    .catch(err=>console.log(`Error happened when inserting in the database : ${err}`));
+
+  }
+});
+
+
 
 //Edit room route
-router.get(`/room/edit`,(req,res)=>{
+router.get(`/room/edit/:id`,(req,res)=>{
 
-  res.render(`rooms/editRoom`,{
-    title:"Edit Room",
-    headingInfo:"EDIT ROOM"
-  });
+  // res.render(`rooms/editRoom`,{
+  //   title:"Edit Room",
+  //   headingInfo:"EDIT ROOM"
+  // });
+
+  roomModel.findById(req.params.id)
+    .then((room)=>{
+        
+        const {_id, title, description, price, address, city, province, country,status} = room;
+        
+        res.render("rooms/editRoom",{
+            
+            _id,
+            title,
+            description,
+            price,
+            address,
+            city,
+            province,
+            country,
+            status
+        });
+        //console.log(moment(dueDate).format('YYYY-MM-DD'))
+
+
+
+    })
+
+    .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
+})
+
+
+router.put("/room/update/:id",(req,res)=>{
+  const messages=[];
+  const room = {
+    title : req.body.title,
+    description : req.body.description,
+    price : req.body.price,
+    address : req.body.address,
+    city : req.body.city,
+    province : req.body.province,
+    country : req.body.country,
+    status : req.body.status
+
+  }
+  
+  roomModel.updateOne({_id:req.params.id},room )
+  .then(()=>{
+
+    //  req.session.roomInfo = room;
+     res.redirect(`/admin/room/list`)
+
+  })
+
+   .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
+
+});
+
+
+router.delete("/room/delete/:id",(req,res)=>{
+  roomModel.deleteOne({_id:req.params.id})
+  .then(()=>{
+      res.redirect("/admin/room/list");
+  })
+
+
+  .catch(err=>console.log(`Error happened when deleting data from the database : ${err}`));
+});
+
+
+//List room route
+router.get(`/room/list`,(req,res)=>{
+
+      //pull from the database, get the results that was returned and then inject that results into the taskDashboard
+      //return an array. Use the find when you want to pull multiple values from the database
+      roomModel.find()
+   
+      .then((rooms)=>{ 
+          //filter out the information that you want from array of documnets that was returned into a new array
+  
+          //array 3 documents meaning that the array has 3 elements
+          
+          const filteredRoom = rooms.map(room=>{     
+              return{
+                  id:room._id,
+                  title:room.title,
+                  description:room.description,   
+                  // date:moment(task.dueDate).format('YYYY-MM-DD'),
+                  price:room.price,
+                  address:room.address,
+                  city:room.city,
+                  province:room.province,
+                  country:room.country,
+                  status:room.status
+              }          
+          });
+  
+          res.render("rooms/adminListRoom",{
+              title:"Room listing",
+              headingInfo:"ROOM LISTING",
+              data:filteredRoom
+  
+          });
+  
+      })
+  
+      .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
+      
+  
+  // res.render(`rooms/adminListRoom`,{
+  //   title:"Room listing",
+  //   headingInfo:"ROOM LISTING"
+  // });
 })
 
 
 router.get("/logout/",(req,res)=>{
-
   req.session.destroy();
   res.redirect("/admin")
 

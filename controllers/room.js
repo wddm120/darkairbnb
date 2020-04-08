@@ -15,7 +15,6 @@ router.get(`/`,(req,res)=>{
 });
 
 
-
 ////Route to fetch all rooms
 router.get("/list",(req,res)=>
 {
@@ -59,130 +58,132 @@ router.get("/list",(req,res)=>
 });
 
 
-//Add room route
-router.get(`/add`,(req,res)=>{
+// //Add room route
+// router.get(`/add`,(req,res)=>{
 
-  res.render(`rooms/addRoom`,{
-    title:"Add Room",
-    headingInfo:"ADD ROOM"
-  });
-})
-
-
-router.post(`/add`,(req, res) => {
-  // console.log(req.body);
-  const errors = [];
-  const {title,description,price,address,city,province,country,status} = req.body;
-
-  //object
-  const newRoom = {
-    title : req.body.title,
-    description : req.body.description,
-    price : req.body.price,
-    address : req.body.address,
-    city : req.body.city,
-    province : req.body.province,
-    country : req.body.country,
-    status: req.body.status
-
-  }
-
-  /*Rules for inserting into a MongoDB database using mongoose is to do the following :
-  1. you have to create an instance of the module, you must pass data that you want insertedin the form of an object(object literal)
-  2. From the instance, you call the save method
-
-  */
+//   res.render(`rooms/addRoom`,{
+//     title:"Add Room",
+//     headingInfo:"ADD ROOM"
+//   });
+// })
 
 
+// router.post(`/add`,(req, res) => {
+//   // console.log(req.body);
+//   const errors = [];
+//   const {title,description,price,address,city,province,country,status} = req.body;
 
-  if (req.body.title == "") {
-    errors.push("Title is required");  
-  }
-  // if (req.body.description == "") {
-  //   errors.push("Description is required"); 
-  // }
-  // if (req.body.price == "") {
-  //   errors.push("Price is required");
-  // }
-  // if (req.body.address == "") {
-  //   errors.push("Address is required");
-  // } 
-  // if (req.body.city == "") {
-  //   errors.push("City is required");
-  // }
-  // if (req.body.province == "") {
-  //   errors.push("Province is required");
-  // }
-  // if (req.body.country == "") {
-  //   errors.push("Country is required");
-  // }
+//   //object
+//   const newRoom = {
+//     title : req.body.title,
+//     description : req.body.description,
+//     price : req.body.price,
+//     address : req.body.address,
+//     city : req.body.city,
+//     province : req.body.province,
+//     country : req.body.country,
+//     status: req.body.status
+
+//   }
+
+//   /*Rules for inserting into a MongoDB database using mongoose is to do the following :
+//   1. you have to create an instance of the module, you must pass data that you want insertedin the form of an object(object literal)
+//   2. From the instance, you call the save method
+
+//   */
 
 
-  if (errors.length > 0) {
-    res.render(`rooms/addRoom`, {
-      messages: errors
-    });
-  } else {
-    // console.log(req.body);
-    // console.log(accountSid);
-    // console.log(authToken);
 
-    //instance
-    const room = new roomModel(newRoom);
+//   if (req.body.title == "") {
+//     errors.push("Title is required");  
+//   }
+//   // if (req.body.description == "") {
+//   //   errors.push("Description is required"); 
+//   // }
+//   // if (req.body.price == "") {
+//   //   errors.push("Price is required");
+//   // }
+//   // if (req.body.address == "") {
+//   //   errors.push("Address is required");
+//   // } 
+//   // if (req.body.city == "") {
+//   //   errors.push("City is required");
+//   // }
+//   // if (req.body.province == "") {
+//   //   errors.push("Province is required");
+//   // }
+//   // if (req.body.country == "") {
+//   //   errors.push("Country is required");
+//   // }
+
+
+//   if (errors.length > 0) {
+//     res.render(`rooms/addRoom`, {
+//       messages: errors
+//     });
+//   } else {
+//     // console.log(req.body);
+//     // console.log(accountSid);
+//     // console.log(authToken);
+
+//     //instance
+//     const room = new roomModel(newRoom);
     
-    room.save()
+//     room.save()
     
-    .then(()=>{
-      // res.redirect("/")
-      res.render("rooms/addRoom", {
-        replyMsg: "Room added"
-        // rooms: productModel.getAllRooms()
-      });
-    })
-    .catch(err=>console.log(`Error happened when inserting in the database : ${err}`));
+//     .then(()=>{
+//       // res.redirect("/")
+//       res.render("rooms/addRoom", {
+//         replyMsg: "Room added"
+//         // rooms: productModel.getAllRooms()
+//       });
+//     })
+//     .catch(err=>console.log(`Error happened when inserting in the database : ${err}`));
 
-  }
-});
+//   }
+// });
 
 
-//Edit room route
-router.get(`/edit`,(req,res)=>{
+// //Edit room route
+// router.get(`/edit`,(req,res)=>{
 
-  res.render(`rooms/editRoom`,{
-    title:"Edit Room",
-    headingInfo:"EDIT ROOM"
-  });
-})
+//   res.render(`rooms/editRoom`,{
+//     title:"Edit Room",
+//     headingInfo:"EDIT ROOM"
+//   });
+// })
 
-router.put("/update/:id",(req,res)=>{
-  const messages=[];
-  const room = {
-    firstName : req.body.firstName,
-    lastName : req.body.lastName,
-    gender : req.body.gender,
-    dateOfBirth : req.body.dateOfBirth,
-    email : req.body.email,
-    phoneNumber : req.body.phoneNumber,
-    governmentId : req.body.governmentId,
-    address : req.body.address
+// router.put("/edit/:id",(req,res)=>{
+//   const messages=[];
+//   const room = {
+//     title : req.body.title,
+//     description : req.body.description,
+//     price : req.body.price,
+//     address : req.body.address,
+//     city : req.body.city,
+//     province : req.body.province,
+//     country : req.body.country,
+//     status : req.body.status
 
-  }
+//   }
   
-  userModel.updateOne({_id:req.params.id},room )
-  .then(()=>{
+//   roomModel.updateOne({_id:req.params.id},room )
+//   .then(()=>{
 
-     req.session.userInfo = room;
-     res.redirect(`/edit`)
+//      req.session.userInfo = room;
+//      res.redirect(`/edit`)
 
 
  
-  })
+//   })
 
-   .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
+//    .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
 
 
 
-});
+// });
+
+
 
 // //show add room form
 // router.get(`/add`,(req,res)=>{
