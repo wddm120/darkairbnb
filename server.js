@@ -92,13 +92,13 @@ app.use((req,res,next)=>{
 
 })
 
-//session is assigned to global variable so can be accessed any handlebars file
-app.use((req,res,next)=>{
+// //session is assigned to global variable so can be accessed any handlebars file
+// app.use((req,res,next)=>{
 
-  res.locals.room=req.session.roomInfo;
-  next();
+//   res.locals.room=req.session.roomInfo;
+//   next();
 
-})
+// })
 
 
 
