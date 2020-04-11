@@ -50,18 +50,18 @@ router.post(`/signup`,(req, res) => {
   if (req.body.email == "") {
     errors.push("Email is required");  
   }
-  // if (req.body.phoneNumber == "") {
-  //   errors.push("Phone number is required"); 
-  // }
-  // if (req.body.firstName == "") {
-  //   errors.push("First name is required");
-  // }
-  // if (req.body.password == "") {
-  //   errors.push("Password is required");
-  // } 
-  // else if (req.body.password.length < 8) {
-  //   errors.push("use at least 8 characters");
-  // } 
+  if (req.body.phoneNumber == "") {
+    errors.push("Phone number is required"); 
+  }
+  if (req.body.firstName == "") {
+    errors.push("First name is required");
+  }
+  if (req.body.password == "") {
+    errors.push("Password is required");
+  } 
+  else if (req.body.password.length < 8) {
+    errors.push("use at least 8 characters");
+  } 
 
   if (errors.length > 0) {
     res.render(`general/signup`, {
@@ -125,20 +125,20 @@ router.post(`/signup`,(req, res) => {
       });
 
     
-      // // TWILIO
-      // client.messages
-      //   .create({
-      //     body: `Hi ${firstName} ${lastName}, Thank you for joining Dark Airbnb. Please check your email and verify your account`,
-      //     from: '+14805088297',
-      //     to: `${phoneNumber}`
-      //   })
-      //   .then(message => {
-      //     console.log(message.sid);
+      // TWILIO
+      client.messages
+        .create({
+          body: `Hi ${firstName} ${lastName}, Thank you for joining Dark Airbnb. Please check your email and verify your account`,
+          from: '+14805088297',
+          to: `${phoneNumber}`
+        })
+        .then(message => {
+          console.log(message.sid);
     
-      //   })
-      //   .catch((err) => {
-      //     console.log(`Error ${err}`);
-      //   })
+        })
+        .catch((err) => {
+          console.log(`Error ${err}`);
+        })
   }
 });
 
@@ -155,14 +155,14 @@ router.get(`/login`,(req,res)=>{
 router.post(`/login`,(req,res)=>{
   const errors= [];
 
-  // if(req.body.email=="")
-  // {
-  //   errors.push("Email is required");
-  // }
-  // if(req.body.password=="")
-  // {
-  //   errors.push("Password is required");
-  // }
+  if(req.body.email=="")
+  {
+    errors.push("Email is required");
+  }
+  if(req.body.password=="")
+  {
+    errors.push("Password is required");
+  }
 
   if(errors.length > 0)
   {
@@ -221,29 +221,6 @@ router.post(`/login`,(req,res)=>{
 
 //User Personal Info route
 router.get(`/profile`,(req,res)=>{
-  
-  // userModel.findById(req.params.id)
-  // .then((user)=>{
-      
-  //     const {_id, firstName, lastName, gender, dateOfBirth, email, phone, governmentId, address} = user;
-      
-  //     res.render('general/userDashboard',{
-  //         _id,
-  //         firstName,
-  //         lastName,
-  //         gender,
-  //         dateOfBirth,
-  //         email,
-  //         phone,
-  //         governmentId,
-  //         address
-  //     });
-  //     // console.log(moment(dueDate).format('YYYY-MM-DD'))
-
-  // })
-
-  // .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
-
 
   res.render('general/userDashboard',{
     title:"Personal Info",
@@ -255,28 +232,7 @@ router.get(`/profile`,(req,res)=>{
 //User Edit route
 router.get(`/edit`, (req, res) => {
 
-  //  userModel.findById(req.params.id)
-  //   .then((user)=>{
 
-  //       const {_id, firstName, lastName, gender, dateOfBirth, email, phoneNumber, governmentId, address} = user;
-
-  //       res.render('general/userDashboard',{
-  //           _id,
-  //           firstName,
-  //           lastName,
-  //           gender,
-  //           dateOfBirth,
-  //           email,
-  //           phoneNumber,
-  //           governmentId,
-  //           address
-  //       });
-  //       // console.log(moment(dueDate).format('YYYY-MM-DD'))
-
-  //   })
-
-  //   .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
-  //object
 
   res.render(`general/editUser`, {
     title: "Edit",
@@ -288,6 +244,7 @@ router.get(`/edit`, (req, res) => {
 router.put("/update/:id",(req,res)=>{
   const messages=[];
   const user = {
+    profilePic:req.body.profilePic,
     firstName : req.body.firstName,
     lastName : req.body.lastName,
     gender : req.body.gender,

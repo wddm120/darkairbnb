@@ -217,6 +217,7 @@ router.post(`/room/add`,(req, res) => {
 
   //object
   const newRoom = {
+   
     title : req.body.title,
     description : req.body.description,
     price : req.body.price,
@@ -280,8 +281,8 @@ router.post(`/room/add`,(req, res) => {
             roomPic: req.files.roomPic.name
           })
           .then(()=>{
-              // res.redirect(`/user/profile/${room._id}`)
-              res.redirect(`/admin/room/list`)
+              res.redirect(`/admin/room/info/${room._id}`)
+              // res.redirect(`/admin/room/list`)
           })
       })
 
@@ -299,7 +300,28 @@ router.post(`/room/add`,(req, res) => {
   }
 });
 
+//Room info route
+router.get("/room/info/:id",(req,res)=>{
+  roomModel.findById(req.params.id)
+  .then((room)=>{
+      const {_id, roomPic, title, description, price, address, city, province, country,status} = room;
 
+    
+      res.render("rooms/adminInfoRoom",{
+        _id,
+        roomPic,
+        title,
+        description,
+        price,
+        address,
+        city,
+        province,
+        country,
+        status
+      });
+  })
+  .catch(err=>console.log(`Error: ${err}`));
+})
 
 //Edit room route
 router.get(`/room/edit/:id`,(req,res)=>{
@@ -312,11 +334,12 @@ router.get(`/room/edit/:id`,(req,res)=>{
   roomModel.findById(req.params.id)
     .then((room)=>{
         
-        const {_id, title, description, price, address, city, province, country,status} = room;
+        const {_id, roomPic, title, description, price, address, city, province, country,status} = room;
         
         res.render("rooms/editRoom",{
             
             _id,
+            roomPic,
             title,
             description,
             price,
@@ -339,6 +362,7 @@ router.get(`/room/edit/:id`,(req,res)=>{
 router.put("/room/update/:id",(req,res)=>{
   const messages=[];
   const room = {
+    roomPic:req.body.roomPic,
     title : req.body.title,
     description : req.body.description,
     price : req.body.price,
@@ -358,6 +382,20 @@ router.put("/room/update/:id",(req,res)=>{
 
   })
 
+
+  // .then((room)=>{
+  //   req.files.roomPic.name = `roomPic-${room._id}${path.parse(req.files.roomPic.name).ext}`
+  //   req.files.roomPic.mv(`public/img/rooms/${req.files.roomPic.name}`)
+  //   .then(()=>{
+  //       roomModel.updateOne({_id:room._id},{
+  //         roomPic: req.files.roomPic.name
+  //       })
+  //       .then(()=>{
+         
+  //           res.redirect(`/admin/room/list`)
+  //       })
+  //   })
+
    .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
 
 });
@@ -375,7 +413,7 @@ router.delete("/room/delete/:id",(req,res)=>{
 
 
 //List room route
-router.get(`/room/list`,(req,res)=>{
+router.get(`/room/list/`,(req,res)=>{
 
       //pull from the database, get the results that was returned and then inject that results into the taskDashboard
       //return an array. Use the find when you want to pull multiple values from the database
@@ -389,6 +427,7 @@ router.get(`/room/list`,(req,res)=>{
           const filteredRoom = rooms.map(room=>{     
               return{
                   id:room._id,
+                  roomPic:room.roomPic,
                   title:room.title,
                   description:room.description,   
                   // date:moment(task.dueDate).format('YYYY-MM-DD'),
@@ -418,6 +457,9 @@ router.get(`/room/list`,(req,res)=>{
   //   headingInfo:"ROOM LISTING"
   // });
 })
+
+
+
 
 
 router.get("/logout/",(req,res)=>{

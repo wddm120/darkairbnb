@@ -1,7 +1,7 @@
 const express = require ('express')
 const router = express.Router();
 //load rooms
-// const productModel = require("../models/roomFake");
+const productModel = require("../models/roomFake");
 // const {email,phoneNumber,firstName,lastName,message} = req.body;
 const userModel = require("../models/user")
 const roomModel = require("../models/room");
@@ -12,12 +12,17 @@ router.get('/', (req, res) => {
   // console.log(process.env.SENDGRID_API_KEY);
   res.render('general/index', {
     title: "Home",
+    
     // indexRooms : promoRooms
-    // rooms: productModel.getAllRooms()
+    rooms: productModel.getAllRooms()
     // carousel : sliders
   });
 });
 
+// res.render("rooms/list",{
+//   data:filteredRoom
+
+// });
 
 
 //Contact us route

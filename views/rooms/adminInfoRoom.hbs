@@ -1,0 +1,24 @@
+<div class="main-info">
+  <div class="sub-header">
+    <h1>{{headingInfo}}</h1>
+  </div>
+  <nav class="sub-nav">
+    <ul>
+      <li><a href="/admin/room/add">Add Room</a></li>
+     
+       <li><a href="/admin/room/list">List Room</a></li>
+      <li><a href="/admin/logout">Logout </a></li>
+    </ul>
+  </nav>
+    <ul class="room-info">
+      <li><img src="/public/img/rooms/{{roomPic}}"></li>   
+      <li><label>Title : </label>{{title}}</li>
+      <li><label>Description : </label>{{description}}</li>
+      <li><label>Price : </label>$ {{price}} CAD / night</li>
+      <li><label>Address : </label>{{address}}</li>
+      <li><label>City : </label>{{city}}</li>
+      <li><label>Province : </label>{{province}}</li>
+      <li><label>Country  :</label>{{country}}</li>
+      <li><label>Status : </label>{{status}}</li>
+    </ul>
+</div>

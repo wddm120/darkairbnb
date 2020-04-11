@@ -43,6 +43,14 @@ const roomSchema = new Schema({
     type:String,
     default:"Open"
   },
+  checkIn:
+  {
+    type:Date
+  },
+  checkOut:
+  {
+    type:Date
+  },
   dateCreated:
   {
     type:Date,

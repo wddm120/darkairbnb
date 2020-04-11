@@ -1,0 +1,22 @@
+<div class="room">
+
+  <form method="POST" action="#">
+    <ul class="room-info">
+      <li><img src="/public/img/rooms/{{roomPic}}"></li>
+      <li class="top-room-info">
+        <h2>{{this.title}}</h2>
+      </li>
+      <li><label>{{description}}</label></li>
+      <li><label>${{price}} CAD / night</label></li>
+      <li><label>${{city}}, {{province}}, {{country}} </label></li>
+      <li><label>Check-in</label><input type="date" name="checkIn" id="checkIn"></li>
+      <li><label>Check-out</label><input type="date" name="checkOut" id="checkOut"></li>
+ 
+    </ul>
+    <div class="sub-footer">
+            <input type="submit" value="Reserve">
+        </div>
+  </form>
+
+
+</div>

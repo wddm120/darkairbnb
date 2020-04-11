@@ -4,14 +4,16 @@
     </div>
     <nav class="sub-nav">
         <ul>
+            {{!-- <li><a href="/admin/dashboard">Dashboard</a></li> --}}
             <li><a href="/admin/room/add">Add Room</a></li>
+            <li><a href="/admin/room/list">List Room</a></li>
             <li><a href="/admin/logout">Logout </a></li>
         </ul>
     </nav>
     <div class="info">
         <form method="POST" action="/admin/room/update/{{_id}}?method=PUT" enctype="multipart/form-data">
         <ul>
-            <li><label>File Upload</label><input type="file" name="profilePic" id="profilePic"></li>
+            <li><label>File Upload</label><input type="file" name="roomPic" id="roomPic"></li>
             <li><label>Title</label><input type="text" name="title" id="title" value="{{title}}"></li>
             <li><label>Description</label><textarea id="description" name="description">{{description}}</textarea></li>
             <li><label>Price</label><input type="text" name="price" id="price" value="{{price}}"></li>

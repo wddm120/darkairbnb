@@ -5,14 +5,14 @@ const router = express.Router();
 const roomModel = require("../models/room");
 
 // show all rooms
-router.get(`/`,(req,res)=>{
-  res.render(`rooms/showRooms`,{
-      title : "Room Listing",
-      // rooms : allRooms
-      // rooms : productModel.getAllRooms()
+// router.get(`/`,(req,res)=>{
+//   res.render(`rooms/showRooms`,{
+//       title : "Room Listing",
+//       // rooms : allRooms
+//       // rooms : productModel.getAllRooms()
 
-  });
-});
+//   });
+// });
 
 
 ////Route to fetch all rooms
@@ -32,6 +32,7 @@ router.get("/list",(req,res)=>
             
             return{
                 id:room._id,
+                roomPic:room.roomPic,
                 title:room.title,
                 description:room.description,   
                 // date:moment(task.dueDate).format('YYYY-MM-DD'),
@@ -58,141 +59,37 @@ router.get("/list",(req,res)=>
 });
 
 
-// //Add room route
-// router.get(`/add`,(req,res)=>{
-
-//   res.render(`rooms/addRoom`,{
-//     title:"Add Room",
-//     headingInfo:"ADD ROOM"
-//   });
-// })
-
-
-// router.post(`/add`,(req, res) => {
-//   // console.log(req.body);
-//   const errors = [];
-//   const {title,description,price,address,city,province,country,status} = req.body;
-
-//   //object
-//   const newRoom = {
-//     title : req.body.title,
-//     description : req.body.description,
-//     price : req.body.price,
-//     address : req.body.address,
-//     city : req.body.city,
-//     province : req.body.province,
-//     country : req.body.country,
-//     status: req.body.status
-
-//   }
-
-//   /*Rules for inserting into a MongoDB database using mongoose is to do the following :
-//   1. you have to create an instance of the module, you must pass data that you want insertedin the form of an object(object literal)
-//   2. From the instance, you call the save method
-
-//   */
+//Info room route
+router.get(`/info/:id`,(req,res)=>{
+  roomModel.findById(req.params.id)
+  .then((room)=>{
+      
+      const {_id, roomPic, title, description, price, address, city, province, country,status, checkIn, checkOut} = room;
+      
+      res.render("rooms/infoRoom",{
+          
+          _id,
+          roomPic,
+          title,
+          description,
+          price,
+          address,
+          city,
+          province,
+          country,
+          status,
+          checkIn,
+          checkOut
+      });
+      //console.log(moment(dueDate).format('YYYY-MM-DD'))
 
 
 
-//   if (req.body.title == "") {
-//     errors.push("Title is required");  
-//   }
-//   // if (req.body.description == "") {
-//   //   errors.push("Description is required"); 
-//   // }
-//   // if (req.body.price == "") {
-//   //   errors.push("Price is required");
-//   // }
-//   // if (req.body.address == "") {
-//   //   errors.push("Address is required");
-//   // } 
-//   // if (req.body.city == "") {
-//   //   errors.push("City is required");
-//   // }
-//   // if (req.body.province == "") {
-//   //   errors.push("Province is required");
-//   // }
-//   // if (req.body.country == "") {
-//   //   errors.push("Country is required");
-//   // }
+  })
 
+  .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
 
-//   if (errors.length > 0) {
-//     res.render(`rooms/addRoom`, {
-//       messages: errors
-//     });
-//   } else {
-//     // console.log(req.body);
-//     // console.log(accountSid);
-//     // console.log(authToken);
+})
 
-//     //instance
-//     const room = new roomModel(newRoom);
-    
-//     room.save()
-    
-//     .then(()=>{
-//       // res.redirect("/")
-//       res.render("rooms/addRoom", {
-//         replyMsg: "Room added"
-//         // rooms: productModel.getAllRooms()
-//       });
-//     })
-//     .catch(err=>console.log(`Error happened when inserting in the database : ${err}`));
-
-//   }
-// });
-
-
-// //Edit room route
-// router.get(`/edit`,(req,res)=>{
-
-//   res.render(`rooms/editRoom`,{
-//     title:"Edit Room",
-//     headingInfo:"EDIT ROOM"
-//   });
-// })
-
-// router.put("/edit/:id",(req,res)=>{
-//   const messages=[];
-//   const room = {
-//     title : req.body.title,
-//     description : req.body.description,
-//     price : req.body.price,
-//     address : req.body.address,
-//     city : req.body.city,
-//     province : req.body.province,
-//     country : req.body.country,
-//     status : req.body.status
-
-//   }
-  
-//   roomModel.updateOne({_id:req.params.id},room )
-//   .then(()=>{
-
-//      req.session.userInfo = room;
-//      res.redirect(`/edit`)
-
-
- 
-//   })
-
-//    .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
-
-
-
-// });
-
-
-
-// //show add room form
-// router.get(`/add`,(req,res)=>{
-// res.render();
-// });
-
-// // when user submits form
-// router.post(`/add`,(req,res)=>{
-// res.render();
-// });
 
 module.exports = router;
