@@ -11,8 +11,8 @@
   <div class="info">
     <form method="POST" action="/user/update/{{user._id}}?method=PUT" enctype="multipart/form-data">
       <ul>
-        <li><img src="/public/img/users/{{user.profilePic}}"> </li>
-        <li><label>File Upload</label><input type="file" name="profilePic" id="profilePic"></li>
+        {{!-- <li><img src="/public/img/users/{{user.profilePic}}"> </li> --}}
+        {{!-- <li><label>File Upload</label><input type="file" name="profilePic" id="profilePic"></li> --}}
         <li><label>First name</label> <input type="text" name="firstName" id="firstName" value="{{user.firstName}}">*</li>
         <li><label>Last name</label> <input type="text" name="lastName" id="lastName" value="{{user.lastName}}"></li>
         <li><label>Gender</label>
@@ -21,7 +21,7 @@
             <option value="female" {{#if_eq}} selected {{/if}}>Female</option> --}}
             <option value="male">Male</option>
             <option value="female">Female</option>
-          </select>{{user.gender}}
+          </select>
         </li>
         <li><label>Date of birth</label> <input type="date" name="dateOfBirth" id="dateOfBirth" value="{{user.dateOfBirth}}">{{user.dateOfBirth}} </li>
         <li><label>Email address</label> <input type="text" name="email" id="email" value="{{user.email}}">*</li>

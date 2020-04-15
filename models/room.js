@@ -43,6 +43,10 @@ const roomSchema = new Schema({
     type:String,
     default:"Open"
   },
+  featured:
+  {
+    type:Boolean
+  },
   checkIn:
   {
     type:Date

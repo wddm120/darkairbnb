@@ -6,6 +6,7 @@ const roomModel = require("../models/room");
 const bcrypt = require("bcryptjs");
 const moment = require('moment');
 const path = require("path");
+const isAdminAuthenticated = require("../middleware/adminAuth");
 
 
 //Admin login route
@@ -29,7 +30,6 @@ router.post(`/login`,(req, res) => {
   {
     errors.push("Password is required");
   }
-
   if(errors.length > 0)
   {
     res.render(`general/adminLogin`,{
@@ -79,11 +79,7 @@ router.post(`/login`,(req, res) => {
 
      .catch(err=>console.log(`Error happened while searching into the data: ${err}`));
 
-   
   }
-
-
-  
 });
 
 
@@ -192,7 +188,7 @@ router.post(`/signup`,(req, res) => {
 });
 
 //Admin Personal Info route
-router.get(`/dashboard`,(req,res)=>{
+router.get(`/dashboard`,isAdminAuthenticated,(req,res)=>{
 
   res.render(`general/adminDashboard`,{
     title:"Personal Info",
@@ -201,8 +197,40 @@ router.get(`/dashboard`,(req,res)=>{
 })
 
 
+//Admin Edit route
+router.get(`/edit`,isAdminAuthenticated, (req, res) => {
+
+  res.render(`general/editAdmin`, {
+    title: "Edit",
+    headingInfo: "ADMIN EDIT"
+  });
+
+})
+
+router.put("/update/:id",(req,res)=>{
+  const messages=[];
+  const admin = {
+    // profilePic:req.body.profilePic,
+    firstName : req.body.firstName,
+    lastName : req.body.lastName,
+    email : req.body.email
+
+  }
+
+  
+  adminModel.updateOne({_id:req.params.id},admin )
+  .then(()=>{
+     req.session.adminInfo = admin;
+     res.redirect(`/admin/dashboard`)
+  })
+   .catch(err=>console.log(`Error happened when updating data from the database : ${err}`));
+
+});
+
+
+
 //Add room route
-router.get(`/room/add`,(req,res)=>{
+router.get(`/room/add`,isAdminAuthenticated,(req,res)=>{
   // res.redirect("/room/add")
   res.render(`rooms/addRoom`,{
     title:"Add Room",
@@ -213,11 +241,11 @@ router.get(`/room/add`,(req,res)=>{
 router.post(`/room/add`,(req, res) => {
   // console.log(req.body);
   const errors = [];
-  const {title,description,price,address,city,province,country,status} = req.body;
+  const {roomPic,title,description,price,address,city,province,country,status,featured} = req.body;
 
   //object
   const newRoom = {
-   
+    roomPic : req.body.roomPic,
     title : req.body.title,
     description : req.body.description,
     price : req.body.price,
@@ -225,7 +253,8 @@ router.post(`/room/add`,(req, res) => {
     city : req.body.city,
     province : req.body.province,
     country : req.body.country,
-    status: req.body.status
+    status: req.body.status,
+    featured: req.body.featured
 
   }
 
@@ -234,31 +263,39 @@ router.post(`/room/add`,(req, res) => {
   2. From the instance, you call the save method
 
   */
-
-
+  if (req.body.roomPic == "") {
+    errors.push("Room picture is required");  
+  }
   if (req.body.title == "") {
     errors.push("Title is required");  
   }
-  // if (req.body.description == "") {
-  //   errors.push("Description is required"); 
-  // }
-  // if (req.body.price == "") {
-  //   errors.push("Price is required");
-  // }
-  // if (req.body.address == "") {
-  //   errors.push("Address is required");
-  // } 
-  // if (req.body.city == "") {
-  //   errors.push("City is required");
-  // }
-  // if (req.body.province == "") {
-  //   errors.push("Province is required");
-  // }
-  // if (req.body.country == "") {
-  //   errors.push("Country is required");
-  // }
-
-
+  if (req.body.title == "") {
+    errors.push("Title is required");  
+  }
+  if (req.body.description == "") {
+    errors.push("Description is required"); 
+  }
+  if (req.body.price == "") {
+    errors.push("Price is required");
+  }
+  if (req.body.address == "") {
+    errors.push("Address is required");
+  } 
+  if (req.body.city == "") {
+    errors.push("City is required");
+  }
+  if (req.body.province == "") {
+    errors.push("Province is required");
+  }
+  if (req.body.country == "") {
+    errors.push("Country is required");
+  }
+  if (req.body.status.length == "") {
+    errors.push("Status is required");
+  }
+  if (req.body.featured == "") {
+    errors.push("Featured is required");
+  }
   if (errors.length > 0) {
     res.render(`rooms/addRoom`, {
       messages: errors
@@ -301,12 +338,11 @@ router.post(`/room/add`,(req, res) => {
 });
 
 //Room info route
-router.get("/room/info/:id",(req,res)=>{
+router.get("/room/info/:id",isAdminAuthenticated,(req,res)=>{
   roomModel.findById(req.params.id)
   .then((room)=>{
-      const {_id, roomPic, title, description, price, address, city, province, country,status} = room;
+      const {_id, roomPic, title, description, price, address, city, province, country, status, featured} = room;
 
-    
       res.render("rooms/adminInfoRoom",{
         _id,
         roomPic,
@@ -317,14 +353,15 @@ router.get("/room/info/:id",(req,res)=>{
         city,
         province,
         country,
-        status
+        status,
+        featured
       });
   })
   .catch(err=>console.log(`Error: ${err}`));
 })
 
 //Edit room route
-router.get(`/room/edit/:id`,(req,res)=>{
+router.get(`/room/edit/:id`,isAdminAuthenticated,(req,res)=>{
 
   // res.render(`rooms/editRoom`,{
   //   title:"Edit Room",
@@ -334,7 +371,7 @@ router.get(`/room/edit/:id`,(req,res)=>{
   roomModel.findById(req.params.id)
     .then((room)=>{
         
-        const {_id, roomPic, title, description, price, address, city, province, country,status} = room;
+        const {_id, roomPic, title, description, price, address, city, province, country,status, featured} = room;
         
         res.render("rooms/editRoom",{
             
@@ -347,11 +384,10 @@ router.get(`/room/edit/:id`,(req,res)=>{
             city,
             province,
             country,
-            status
+            status,
+            featured
         });
         //console.log(moment(dueDate).format('YYYY-MM-DD'))
-
-
 
     })
 
@@ -370,8 +406,8 @@ router.put("/room/update/:id",(req,res)=>{
     city : req.body.city,
     province : req.body.province,
     country : req.body.country,
-    status : req.body.status
-
+    status : req.body.status,
+    status : req.body.featured
   }
   
   roomModel.updateOne({_id:req.params.id},room )
@@ -406,14 +442,12 @@ router.delete("/room/delete/:id",(req,res)=>{
   .then(()=>{
       res.redirect("/admin/room/list");
   })
-
-
   .catch(err=>console.log(`Error happened when deleting data from the database : ${err}`));
 });
 
 
 //List room route
-router.get(`/room/list/`,(req,res)=>{
+router.get(`/room/list/`,isAdminAuthenticated,(req,res)=>{
 
       //pull from the database, get the results that was returned and then inject that results into the taskDashboard
       //return an array. Use the find when you want to pull multiple values from the database
@@ -457,9 +491,6 @@ router.get(`/room/list/`,(req,res)=>{
   //   headingInfo:"ROOM LISTING"
   // });
 })
-
-
-
 
 
 router.get("/logout/",(req,res)=>{

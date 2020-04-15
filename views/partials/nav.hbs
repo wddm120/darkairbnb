@@ -6,7 +6,15 @@
     {{!-- <div style="background-image: url(/img/sliders/slider01.jpg)"></div> --}}
     {{!-- <li>English</li>
     <li>$CAD</li> --}}
+    {{#if user }}
+    <li class="signin"><a href="/user/logout" title="Logout"><img src="/public/img/logout.png" alt=""><strong class="signin-lbl">Logout</strong></a>
+    
+    {{else}}
     <li class="signin"><a href="/user/login" title="Login"><img src="/public/img/user-white.png" alt=""><strong class="signin-lbl">Login</strong></a>
+
+    {{/if}}
+
+   
     </li>
     {{!-- <li class="shopping-cart"><a href="#"><img src="img/Cart.png" alt=""><strong class="cart-lbl" id="cartQty"></strong></a></li> --}}
   </ul>
@@ -15,7 +23,13 @@
     <ul class="menu-list">
       <li><a href="/">Home</a></li>
       <li><a href="/room/list">Room Listing</a></li>
-      <li><a href="/user/signup">User Registration</a></li>
+        {{#if user }}
+<li><a href="/user/profile">Dashboard</a></li>
+    {{else}}
+    <li><a href="/user/signup">User Registration</a></li>
+
+    {{/if}}
+      
     </ul>
   </nav>
 

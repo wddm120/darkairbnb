@@ -1,6 +1,9 @@
 <div class="login">
-  {{#each messages}}
+  {{!-- {{#each messages}}
   <div class="errors">{{>contactus-response}}</div>
+  {{/each}} --}}
+    {{#each messages}}
+  <div class="errors">{{this}}</div>
   {{/each}}
   <h1>{{headingInfo}}</h1>
   <form method="POST" action="/admin/login">

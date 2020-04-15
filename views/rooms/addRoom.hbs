@@ -1,7 +1,8 @@
-  {{#each messages}}
-  <div class="errors">{{replyMsg}}</div>
-  {{/each}}
+ 
 <div class="main-info">
+  {{#each messages}}
+  <div class="errors">{{this}}</div>
+  {{/each}}
     <div class="sub-header">
         <h1>{{headingInfo}}</h1>
     </div>
@@ -28,6 +29,10 @@
                 <option value="open">Available</option>
                 <option value="close">Not Available</option>
             </select>
+            <li><label>Featured Room</label>
+            <input type="radio" name="featured" id="featured" value="yes"><label> &nbsp; Yes</label>
+            <input type="radio" name="featured" id="featured" value="no"><label> &nbsp; No</label>
+            </li>
             </li>
         </ul>
         <div class="sub-footer">

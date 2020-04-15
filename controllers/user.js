@@ -7,6 +7,7 @@ const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const moment = require('moment');
 const path = require("path");
+const isUserAuthenticated = require("../middleware/userAuth");
 
 // User Signup route
 router.get(`/signup`,(req,res)=>{
@@ -220,7 +221,7 @@ router.post(`/login`,(req,res)=>{
 
 
 //User Personal Info route
-router.get(`/profile`,(req,res)=>{
+router.get(`/profile`,isUserAuthenticated,(req,res)=>{
 
   res.render('general/userDashboard',{
     title:"Personal Info",
@@ -230,9 +231,7 @@ router.get(`/profile`,(req,res)=>{
 
 
 //User Edit route
-router.get(`/edit`, (req, res) => {
-
-
+router.get(`/edit`,isUserAuthenticated, (req, res) => {
 
   res.render(`general/editUser`, {
     title: "Edit",
@@ -244,7 +243,7 @@ router.get(`/edit`, (req, res) => {
 router.put("/update/:id",(req,res)=>{
   const messages=[];
   const user = {
-    profilePic:req.body.profilePic,
+    // profilePic:req.body.profilePic,
     firstName : req.body.firstName,
     lastName : req.body.lastName,
     gender : req.body.gender,

@@ -8,7 +8,7 @@ const roomModel = require("../models/room");
 // router.get(`/`,(req,res)=>{
 //   res.render(`rooms/showRooms`,{
 //       title : "Room Listing",
-//       // rooms : allRooms
+//       // data : allRooms
 //       // rooms : productModel.getAllRooms()
 
 //   });
@@ -50,7 +50,8 @@ router.get("/list",(req,res)=>
         res.render("rooms/list",{
             data:filteredRoom
 
-        });
+        });  
+
 
     })
 
@@ -90,6 +91,35 @@ router.get(`/info/:id`,(req,res)=>{
   .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
 
 })
+
+
+router.post(`/find`,(req, res) => {
+
+    roomModel.findOne({city:req.body.location})
+    .then(isMatched=>{
+        if (isMatched)
+        {
+   
+            res.redirect("/room/list")
+        }
+        else
+        {
+          messages.push("Not found");
+            res.render("general/index",{
+                // data:messages
+                messages
+            })
+        }
+    })
+
+    .catch(err=>console.log(`Error : ${err}`));
+
+
+
+
+
+
+  });
 
 
 module.exports = router;
