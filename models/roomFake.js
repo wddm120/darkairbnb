@@ -1,10 +1,10 @@
 
-const settings = {
-  imagePath: `/public/img/rooms/`,
-  starsPath: `/public/img/stars/`,
-  promoPath: `/public/img/`
-  // sliderPath: `img/sliders/`
-}
+// const settings = {
+//   imagePath: `/public/img/rooms/`,
+//   starsPath: `/public/img/stars/`,
+//   promoPath: `/public/img/`
+//   // sliderPath: `img/sliders/`
+// }
 
 // const user = 
 // {
@@ -26,72 +26,72 @@ const settings = {
 // user.init();
 // module.exports=user;
 
-const room = 
-{
-  fakeDB : [],
+// const room = 
+// {
+//   fakeDB : [],
 
-  init()
-  {
-    this.fakeDB.push({
-        id : 110,
-        roomImg : settings.imagePath+`img01.jpg`,
-        starImg: settings.starsPath+`2stars.png`,
-        title: `Hidden Gem of ...`,
-        description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
-        price: 66,
-        promoImg: settings.promoPath+`special-offer-sign.png`
-    });
-    this.fakeDB.push({
-        id : 111,
-        roomImg : settings.imagePath+`img02.jpg`,
-        starImg: settings.starsPath+`3stars.png`,
-        title: `Joshua Tree ...`,
-        description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
-        price: 159,
-        promoImg: settings.promoPath+`special-offer-sign.png`
-        });
-    this.fakeDB.push({
-        id : 112,
-        roomImg : settings.imagePath+`img03.jpg`,
-        starImg: settings.starsPath+`4stars.png`,
-        title: `1 Bdrm Modern ...`,
-        description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
-        price: 99,
-        promoImg: settings.promoPath+`special-offer-sign.png`
-    });
-    this.fakeDB.push({
-        id : 113,
-        roomImg : settings.imagePath+`img04.jpg`,
-        starImg: settings.starsPath+`1star.png`,
-        title: `Entire Chalet. South Lake ...`,
-        description: `The Lake Tahoe Chalet`,
-        price: 249,
-        promoImg: settings.promoPath+`special-offer-sign.png`
-    });
-    this.fakeDB.push({
-        id : 114,
-        roomImg : settings.imagePath+`img05.jpg`,
-        starImg: settings.starsPath+`0star.png`,
-        title: `Entire house ...`,
-        description: `The Lake Tahoe Chalet`,
-        price: 149,
-        promoImg: settings.promoPath+`special-offer-sign.png`
-    });
-    this.fakeDB.push({
-        id : 115,
-        roomImg : settings.imagePath+`img06.jpg`,
-        starImg: settings.starsPath+`5stars.png`,
-        title: `Hector Cave House`,
-        description: `Hector Cave House, carved into the unique caldera cliff for more than 250 years, was originally used as a wine cellar.`,
-        price: 572,
-        promoImg: settings.promoPath+`special-offer-sign.png`
-    });
-  },
-  getAllRooms()
-  {
-    return this.fakeDB;
-  }
-}
+//   init()
+//   {
+//     this.fakeDB.push({
+//         id : 110,
+//         roomImg : settings.imagePath+`img01.jpg`,
+//         starImg: settings.starsPath+`2stars.png`,
+//         title: `Hidden Gem of ...`,
+//         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+//         price: 66,
+//         promoImg: settings.promoPath+`special-offer-sign.png`
+//     });
+//     this.fakeDB.push({
+//         id : 111,
+//         roomImg : settings.imagePath+`img02.jpg`,
+//         starImg: settings.starsPath+`3stars.png`,
+//         title: `Joshua Tree ...`,
+//         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+//         price: 159,
+//         promoImg: settings.promoPath+`special-offer-sign.png`
+//         });
+//     this.fakeDB.push({
+//         id : 112,
+//         roomImg : settings.imagePath+`img03.jpg`,
+//         starImg: settings.starsPath+`4stars.png`,
+//         title: `1 Bdrm Modern ...`,
+//         description: `Entire home, Self check-in, Sparkling clean, Victoria And Christian is a Superhost`,
+//         price: 99,
+//         promoImg: settings.promoPath+`special-offer-sign.png`
+//     });
+//     this.fakeDB.push({
+//         id : 113,
+//         roomImg : settings.imagePath+`img04.jpg`,
+//         starImg: settings.starsPath+`1star.png`,
+//         title: `Entire Chalet. South Lake ...`,
+//         description: `The Lake Tahoe Chalet`,
+//         price: 249,
+//         promoImg: settings.promoPath+`special-offer-sign.png`
+//     });
+//     this.fakeDB.push({
+//         id : 114,
+//         roomImg : settings.imagePath+`img05.jpg`,
+//         starImg: settings.starsPath+`0star.png`,
+//         title: `Entire house ...`,
+//         description: `The Lake Tahoe Chalet`,
+//         price: 149,
+//         promoImg: settings.promoPath+`special-offer-sign.png`
+//     });
+//     this.fakeDB.push({
+//         id : 115,
+//         roomImg : settings.imagePath+`img06.jpg`,
+//         starImg: settings.starsPath+`5stars.png`,
+//         title: `Hector Cave House`,
+//         description: `Hector Cave House, carved into the unique caldera cliff for more than 250 years, was originally used as a wine cellar.`,
+//         price: 572,
+//         promoImg: settings.promoPath+`special-offer-sign.png`
+//     });
+//   },
+//   getAllRooms()
+//   {
+//     return this.fakeDB;
+//   }
+// }
 
 // const promoRooms =[
 //   { //0
@@ -138,8 +138,8 @@ const room =
 //   }
 // ];
 
-room.init();
-module.exports=room;
+// room.init();
+// module.exports=room;
 
 
 

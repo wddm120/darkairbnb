@@ -129,6 +129,44 @@ router.post(`/find`,(req, res) => {
   });
 
 
+  router.post(`/find/province`,(req, res) => {
+  
+    //incase sensitive find room feature, filtered by city & created date
+    roomModel.find({province:{ $regex: req.body.selectProvince, $options: 'i' }}).sort({dateCreated:-1})
+
+      .then((rooms)=>{ 
+          //filter out the information that you want from array of documnets that was returned into a new array
+  
+          //array 3 documents meaning that the array has 3 elements
+          
+          const filteredRoom = rooms.map(room=>{
+              
+              return{
+                  id:room._id,
+                  roomPic:room.roomPic,
+                  title:room.title,
+                  description:room.description,   
+                  // date:moment(task.dueDate).format('YYYY-MM-DD'),
+                  price:room.price,
+                  city:room.city,
+                  province:room.province
+    
+              }
+              
+          });
+  
+          res.render("rooms/list",{
+              data:filteredRoom
+  
+          });  
+  
+      })
+  
+      .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
+
+  });
+
+
 
   
 

@@ -14,11 +14,19 @@
   <div class="room-std">
     <ul class="room-info-std">
       <li><img src="/public/img/rooms/{{this.roomPic}}"></li>
-      <li class="top-room-info-std">
+      {{!-- <li class="top-room-info-std">
         <h3>{{this.title}}</h3>
       </li>
       <li><label>{{this.description}}</label></li>
-      <li><label>${{this.price}} CAD / night</label></li>
+      <li><label>${{this.price}} CAD / night</label></li> --}}
+      <li><label>Title : </label>{{this.title}}</li>
+      <li><label>Description : </label>{{this.description}}</li>
+      <li><label>Price : </label>$ {{this.price}} CAD / night</li>
+      <li><label>Address : </label>{{this.address}}</li>
+      <li><label>City : </label>{{this.city}}</li>
+      <li><label>Province : </label>{{this.province}}</li>
+      <li><label>Country  :</label>{{this.country}}</li>
+      <li><label>Status : </label>{{this.status}}</li>
     </ul>
     <div class="sub-footer-std">
       <ul>

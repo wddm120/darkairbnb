@@ -1,16 +1,32 @@
+<div class="selectBy">
+   <form method="POST" action="/room/find/province">
+      <div >
+         <legend>Select By Province &nbsp</legend>
+         <select name="selectProvince" >
+            <option value="" selected>-- Please select --</option>
+            <option value="manitoba">Manitoba</option>
+            <option value="new brunswick">New Brunswick</option>
+            <option value="ontario">Ontario</option>
+            <option value="quebec">Quebec</option>
+         </select>
+        <input type="submit" name="search" value="Search">
+      </div>
+   </form>
+</div>
 
 <div class="room">
 {{#each data }}
 <a href="/room/info/{{this.id}}">
-<ul class="room-info zoom">
-   <li><img src="/public/img/rooms/{{this.roomPic}}"></li>
-   <li class="top-room-info">
-      <h3>{{this.title}}</h3>
-   </li>
-   <li><label>{{this.description}}</label></li>
-   <li><label>${{this.price}} CAD / night</label></li>
-   <li><label>City : {{this.city}}</label></li>
-</ul>
+   <ul class="room-info zoom">
+      <li><img src="/public/img/rooms/{{this.roomPic}}"></li>
+      <li class="top-room-info">
+         <h3>{{this.title}}</h3>
+      </li>
+      <li><label>{{this.description}}</label></li>
+      <li><label>${{this.price}} CAD / night</label></li>
+      <li><label>City : {{this.city}}</label></li>
+      <li><label>Province : {{this.province}}</label></li>
+   </ul>
 </a>
 {{/each}}
 </div>

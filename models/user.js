@@ -64,7 +64,8 @@ const userSchema = new Schema({
 
 });
 
-userSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' });
+//is email exist checker plugin
+// userSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' });
 
 
 userSchema.pre("save",function(next){

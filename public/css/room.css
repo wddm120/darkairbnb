@@ -16,6 +16,27 @@ h3{
   text-align: left;
 }
 
+
+.selectBy{
+  padding: 0.5rem;
+  border-bottom: solid 1px grey;
+
+}
+
+.selectBy input[type=submit] {
+  padding: 0 18px;
+  height: 25px;
+  font-weight: bold;
+  background: var(--primary);
+  border: 1px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  border-radius: 16px;
+  outline: 0;
+  margin-left: 0.5rem;
+ 
+}
+
+
 .room{
   display: grid;
   padding: 0 0.5rem;

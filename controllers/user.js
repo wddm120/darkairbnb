@@ -9,6 +9,9 @@ const moment = require('moment');
 const path = require("path");
 const isUserAuthenticated = require("../middleware/userAuth");
 
+
+
+
 // User Signup route
 router.get(`/signup`,(req,res)=>{
   res.render(`general/signup`,{
@@ -35,9 +38,7 @@ router.post(`/signup`,(req, res) => {
   /*Rules for inserting into a MongoDB database using mongoose is to do the following :
   1. you have to create an instance of the module, you must pass data that you want insertedin the form of an object(object literal)
   2. From the instance, you call the save method
-
   */
-
 
   // TWILIO
   const accountSid = (process.env.TWILIO_API_KEY);
@@ -68,24 +69,48 @@ router.post(`/signup`,(req, res) => {
     res.render(`general/signup`, {
       messages: errors
     });
-  } else {
+  } 
+  // if(userModel.findOne({email})){
+  //   errors.push("email is already exist");
+
+
+  // }
+  else{
     // console.log(req.body);
     // console.log(accountSid);
     // console.log(authToken);
 
+
+  //   userModel.findOne({ email: req.body.email }, function(err, user) {
+  //     if(err) {
+  //        //handle error here
+  //     }
+   
+  //     //if a user was found, that means the user's email matches the entered email
+  //     if (user) {
+  //           var err = new Error('A user with that email has already registered. Please use a different email..')
+  //          err.status = 400;
+  //          return next(err);
+  //     } else {
+  //         //code if no user with entered email was found
+  //     }
+  //  }); 
+
+
+
     //instance
     const user = new userModel(newUser);
-    
+
     user.save()
-    
-    .then(()=>{
-      // res.redirect("/")
-      res.render("general/index", {
-        replyMsg: "We sent an email to " +`${email}`+ " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
-        // rooms: productModel.getAllRooms()
-      });
-    })
-    .catch(err=>console.log(`Error happened when inserting in the database : ${err}`));
+
+      .then(() => {
+        // res.redirect("/")
+        res.render("general/index", {
+          replyMsg: "We sent an email to " + `${email}` + " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
+          // rooms: productModel.getAllRooms()
+        });
+      })
+      .catch(err => console.log(`Error happened when inserting in the database : ${err}`));
 
 
     const clientMsg = {
@@ -115,7 +140,7 @@ router.post(`/signup`,(req, res) => {
       //   res.redirect("/");
       // })
       .then(() => {
-        
+
         // res.render("general/index", {
         //   replyMsg: "We sent an email to " +`${email}`+ " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
         //   rooms: productModel.getAllRooms()
@@ -125,21 +150,21 @@ router.post(`/signup`,(req, res) => {
         console.log(`Error ${err}`);
       });
 
-    
-      // TWILIO
-      client.messages
-        .create({
-          body: `Hi ${firstName} ${lastName}, Thank you for joining Dark Airbnb. Please check your email and verify your account`,
-          from: '+14805088297',
-          to: `${phoneNumber}`
-        })
-        .then(message => {
-          console.log(message.sid);
-    
-        })
-        .catch((err) => {
-          console.log(`Error ${err}`);
-        })
+
+    // TWILIO
+    client.messages
+      .create({
+        body: `Hi ${firstName} ${lastName}, Thank you for joining Dark Airbnb. Please check your email and verify your account`,
+        from: '+14805088297',
+        to: `${phoneNumber}`
+      })
+      .then(message => {
+        console.log(message.sid);
+
+      })
+      .catch((err) => {
+        console.log(`Error ${err}`);
+      })
   }
 });
 
