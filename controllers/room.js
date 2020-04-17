@@ -93,7 +93,7 @@ router.get(`/info/:id`,(req,res)=>{
 
 router.post(`/find`,(req, res) => {
   
-    //incase sensitive find feature, filtered by city & created date
+    //incase sensitive find room feature, filtered by city & created date
     roomModel.find({city:{ $regex: req.body.location, $options: 'i' }}).sort({dateCreated:-1})
 
    
