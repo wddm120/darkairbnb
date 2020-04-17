@@ -407,7 +407,7 @@ router.put("/room/update/:id",(req,res)=>{
     province : req.body.province,
     country : req.body.country,
     status : req.body.status,
-    status : req.body.featured
+    featured : req.body.featured
   }
   
   roomModel.updateOne({_id:req.params.id},room )

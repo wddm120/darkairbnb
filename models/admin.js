@@ -36,6 +36,7 @@ const adminSchema = new Schema({
 
 });
 
+//duplicating email address checker
 adminSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' });
 
 

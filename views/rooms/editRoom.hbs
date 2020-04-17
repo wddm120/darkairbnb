@@ -13,7 +13,7 @@
     <div class="info">
         <form method="POST" action="/admin/room/update/{{_id}}?method=PUT" enctype="multipart/form-data">
         <ul>
-            <li><label>File Upload</label><input type="file" name="roomPic" id="roomPic"></li>
+            <li><label>File Upload</label><input type="file" name="roomPic" id="roomPic" ></li>
             <li><label>Title</label><input type="text" name="title" id="title" value="{{title}}"></li>
             <li><label>Description</label><textarea id="description" name="description">{{description}}</textarea></li>
             <li><label>Price</label><input type="text" name="price" id="price" value="{{price}}"></li>
@@ -26,6 +26,10 @@
                 <option value="open">Available</option>
                 <option value="close">Not Available</option>
             </select>
+            </li>
+             <li><label>Featured Room</label>
+            <input type="radio" name="featured" id="featured" value="yes"><label> &nbsp; Yes</label>
+            <input type="radio" name="featured" id="featured" value="no"><label> &nbsp; No</label>
             </li>
         </ul>
         <div class="sub-footer">

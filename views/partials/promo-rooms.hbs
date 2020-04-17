@@ -1,4 +1,4 @@
-{{!-- <div class="room" id="promo">
+<div class="room" id="promo">
 {{#each data }}
 <a href="/room/info/{{this.id}}">
 <ul class="room-info zoom">
@@ -8,24 +8,11 @@
    </li>
    <li><label>{{this.description}}</label></li>
    <li><label>${{this.price}} CAD / night</label></li>
+   <li><label>{{this.featured}} </label></li>
+   {{!-- <li><img src="/public/img/special-offer-sign.png" class="star-img"></li> --}}
 </ul>
 </a>
 {{/each}}
-</div> --}}
-
-
-<div class="room" id="promo">
-   {{#each rooms }}
-   <ul class="room-info zoom">
-      <li><img src={{this.roomImg}}></li>
-      <li class="top-room-info">
-         <h3>{{this.title}}</h3><img src={{this.starImg}} class="star-img">
-      </li>
-      <li><label>{{this.description}}</label></li>
-      <li><label>${{this.price}} CAD / night</label></li>
-      <li><img src={{this.promoImg}} class="star-img"></li>
-   </ul>
-   {{/each}}
 </div>
 
-{{!-- <div class="pagenumbers" id="pagination"></div><br> --}}
+

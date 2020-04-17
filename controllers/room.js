@@ -21,7 +21,8 @@ router.get("/list",(req,res)=>
 
     //pull from the database, get the results that was returned and then inject that results into the taskDashboard
     //return an array. Use the find when you want to pull multiple values from the database
-    roomModel.find()
+    //sort room by date created
+    roomModel.find().sort({dateCreated:-1})
  
     .then((rooms)=>{ 
         //filter out the information that you want from array of documnets that was returned into a new array
@@ -51,7 +52,6 @@ router.get("/list",(req,res)=>
             data:filteredRoom
 
         });  
-
 
     })
 
@@ -84,8 +84,6 @@ router.get(`/info/:id`,(req,res)=>{
       });
       //console.log(moment(dueDate).format('YYYY-MM-DD'))
 
-
-
   })
 
   .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
@@ -113,11 +111,6 @@ router.post(`/find`,(req, res) => {
     })
 
     .catch(err=>console.log(`Error : ${err}`));
-
-
-
-
-
 
   });
 

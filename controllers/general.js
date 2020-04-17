@@ -1,28 +1,48 @@
 const express = require ('express')
 const router = express.Router();
-//load rooms
-const productModel = require("../models/roomFake");
-// const {email,phoneNumber,firstName,lastName,message} = req.body;
 const userModel = require("../models/user")
+//load rooms
 const roomModel = require("../models/room");
 
 
 // Home route
-router.get('/', (req, res) => {
-  // console.log(process.env.SENDGRID_API_KEY);
-  res.render('general/index', {
-    title: "Home",
-    
-    // indexRooms : promoRooms
-    rooms: productModel.getAllRooms()
-    // carousel : sliders
-  });
+router.get('/',async (req, res) => {
+
+  //All featured rooms are showing on homepage, pulled from db and filtered by date created
+  roomModel.find({featured:'true'}).sort({dateCreated:-1})
+  // roomModel.findOne({featured:req.body.location})
+ 
+    .then((rooms)=>{ 
+        //filter out the information that you want from array of documnets that was returned into a new array
+
+        //array 3 documents meaning that the array has 3 elements
+        
+        const filteredRoom = rooms.map(room=>{
+            
+            return{
+                id:room._id,
+                roomPic:room.roomPic,
+                title:room.title,
+                description:room.description,   
+                // date:moment(task.dueDate).format('YYYY-MM-DD'),
+                price:room.price
+  
+            }
+            
+        });
+
+        res.render("general/index",{
+            data:filteredRoom
+
+        });  
+
+    })
+
+    .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
+  
+
 });
 
-// res.render("rooms/list",{
-//   data:filteredRoom
-
-// });
 
 
 //Contact us route
