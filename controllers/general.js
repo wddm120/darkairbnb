@@ -25,7 +25,8 @@ router.get('/',async (req, res) => {
                 title:room.title,
                 description:room.description,   
                 // date:moment(task.dueDate).format('YYYY-MM-DD'),
-                price:room.price
+                price:room.price,
+                city:room.city
   
             }
             

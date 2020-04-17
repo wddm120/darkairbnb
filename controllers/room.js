@@ -93,26 +93,43 @@ router.get(`/info/:id`,(req,res)=>{
 
 router.post(`/find`,(req, res) => {
 
-    roomModel.findOne({city:req.body.location})
-    .then(isMatched=>{
-        if (isMatched)
-        {
+    roomModel.find({city:req.body.location}).sort({dateCreated:-1})
+    // roomModel.findOne({featured:req.body.location})
    
-            res.redirect("/room/list")
-        }
-        else
-        {
-          messages.push("Not found");
-            res.render("general/index",{
-                // data:messages
-                messages
-            })
-        }
-    })
-
-    .catch(err=>console.log(`Error : ${err}`));
+      .then((rooms)=>{ 
+          //filter out the information that you want from array of documnets that was returned into a new array
+  
+          //array 3 documents meaning that the array has 3 elements
+          
+          const filteredRoom = rooms.map(room=>{
+              
+              return{
+                  id:room._id,
+                  roomPic:room.roomPic,
+                  title:room.title,
+                  description:room.description,   
+                  // date:moment(task.dueDate).format('YYYY-MM-DD'),
+                  price:room.price,
+                  city:room.city
+    
+              }
+              
+          });
+  
+          res.render("general/index",{
+              data:filteredRoom
+  
+          });  
+  
+      })
+  
+      .catch(err=>console.log(`Error happened when pulling from the database : ${err}`));
 
   });
+
+
+
+  
 
 
 module.exports = router;
