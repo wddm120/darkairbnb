@@ -92,9 +92,10 @@ router.get(`/info/:id`,(req,res)=>{
 
 
 router.post(`/find`,(req, res) => {
+  
+    //incase sensitive find feature, filtered by city & created date
+    roomModel.find({city:{ $regex: req.body.location, $options: 'i' }}).sort({dateCreated:-1})
 
-    roomModel.find({city:req.body.location}).sort({dateCreated:-1})
-    // roomModel.findOne({featured:req.body.location})
    
       .then((rooms)=>{ 
           //filter out the information that you want from array of documnets that was returned into a new array
