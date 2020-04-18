@@ -100,7 +100,6 @@ router.post(`/signup`,(req, res) => {
   //object
   const newAdmin = {
     email : req.body.email,
-    phoneNumber : req.body.phoneNumber,
     firstName : req.body.firstName,
     lastName : req.body.lastName,
     password: req.body.password
@@ -114,18 +113,18 @@ router.post(`/signup`,(req, res) => {
  if (req.body.email == "") {
    errors.push("Email is required");  
  }
- // if (req.body.firstName == "") {
- //   errors.push("First name is required");
- // }
- // if (req.body.password == "") {
- //   errors.push("Password is required");
- // } 
- // else if (req.body.password.length < 8) {
- //   errors.push("use at least 8 characters");
- // } 
+ if (req.body.firstName == "") {
+   errors.push("First name is required");
+ }
+ if (req.body.password == "") {
+   errors.push("Password is required");
+ } 
+ else if (req.body.password.length < 8) {
+   errors.push("use at least 8 characters");
+ } 
 
  if (errors.length > 0) {
-   res.render(`general/signup`, {
+   res.render(`general/adminSignup`, {
      messages: errors
    });
  } else {

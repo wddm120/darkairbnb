@@ -96,10 +96,14 @@ padding: 0.5rem;
   /* padding: 0.25rem; */
 }
 
-.verified-user h3, .contactus-response h3{
+.verified-user h3{
   color: var(--light);
   
 } 
+
+.contactus-response h3{
+color: red;
+}
 
 .verified-user a{
   color: var(--link);

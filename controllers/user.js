@@ -106,8 +106,10 @@ router.post(`/signup`,(req, res) => {
       .then(() => {
         // res.redirect("/")
         res.render("general/index", {
-          replyMsg: "We sent an email to " + `${email}` + " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account.",
+          replyMsg: "We sent an email to " + `${email}` + " and SMS to " + `${phoneNumber}` + " . To continue, please check your email and verify your account."
           // rooms: productModel.getAllRooms()
+      
+
         });
       })
       .catch(err => console.log(`Error happened when inserting in the database : ${err}`));
