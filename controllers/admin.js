@@ -120,7 +120,7 @@ router.post(`/signup`,(req, res) => {
    errors.push("Password is required");
  } 
  else if (req.body.password.length < 8) {
-   errors.push("use at least 8 characters");
+   errors.push("Use password at least 8 characters");
  } 
 
  if (errors.length > 0) {
